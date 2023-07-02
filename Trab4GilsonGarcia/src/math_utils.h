@@ -10,13 +10,13 @@
 #include <vector>
 
 struct Point {
-  float x;
-  float y;
+    float x;
+    float y;
 };
 
 struct Math_Vector {
-  float x;
-  float y;
+    float x;
+    float y;
 };
 
 using namespace std;
@@ -58,7 +58,7 @@ void rotatePoints(float *vx, float *vy, int nPoints, float pivotX, float pivotY,
 float calculateMagnitude(float x, float y);
 
 // 3D
-Vector2 project(Vector3 v, float d);
+Vector2 project3DPoint(Vector3 v, float d);
 
 Vector3 rotatePointAroundYAxis(Vector3 p, double angle);
 

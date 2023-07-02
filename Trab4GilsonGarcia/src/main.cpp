@@ -16,6 +16,7 @@
 #include "math_utils.h"
 #include "Vector3.h"
 #include "Vector2.h"
+#include "Circle.h"
 
 using namespace std;
 
@@ -69,7 +70,25 @@ void drawCube(Vector2 cube[8]) {
 //Todos os comandos para desenho na canvas devem ser chamados dentro da render().
 //Deve-se manter essa fun��o com poucas linhas de codigo.
 float angle = 0.0;
-void render()
+
+float r = 100;
+Circle *virabrequim = new Circle(10, r *cos(0.0) + 500, r *sin(0.0) + 200);
+
+void render() {
+    for (float ang = 0.0; ang < 2 * PI; ang += 0.001) {
+        float x = r * cos(ang) + 500;
+        float y = r * sin(ang) + 200;
+        CV::color(0, 0, 0);
+        CV::point(x, y);
+    }
+
+    angle += 0.01;
+    if (angle > 360)
+        angle = 0;
+
+    virabrequim->render();
+}
+/*void render()
 {
    Vector3 p;
    Vector2 saida[8];
@@ -79,14 +98,14 @@ void render()
       p = rotatePointAroundZAxis(p, angle);
       p = rotatePointAroundYAxis(p, angle);
       p = translate3DPoint(p, 0, 0, d + 100);
-      saida[i] = project(p, d);
+      saida[i] = project3DPoint(p, d);
    }
 
    CV::translate(300, 200);
    CV::color(0);
    angle += 0.3;
    drawCube(saida);
-}
+}*/
 
 //funcao chamada toda vez que uma tecla for pressionada.
 void keyboard(int key)

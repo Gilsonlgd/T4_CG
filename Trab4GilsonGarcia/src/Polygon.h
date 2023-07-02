@@ -1,13 +1,14 @@
 #ifndef FIGURA_H_INCLUDED
 #define FIGURA_H_INCLUDED
 
-#include <vector>
+#include "Vector3.h"
+#include "constants.h"
+#include "gl_canvas2d.h"
+#include "math_utils.h"
+#include <cfloat>
 #include <cmath>
 #include <iostream>
-#include <cfloat>
-#include "constants.h"
-#include "math_utils.h"
-#include "gl_canvas2d.h"
+#include <vector>
 
 using namespace std;
 
@@ -18,15 +19,12 @@ de n lados.
 ######################
 */
 
-
 class Polygon {
-protected:
-    bool visible;
-
+  protected:
     int nPoints;
-    vector<float> vx, vy;
+    vector<Vector3> vertices;
     float angle;
-    
+
     float offsetX, offsetY;
 
     float r, g, b;
@@ -34,66 +32,54 @@ protected:
     int colorScale;
 
     // translada de acordo com um valor
-    virtual void translateBy(float xIncrease, float yIncrease) {
-        // Criando a matriz de translação
-        vector<vector<float>> translationMatrix = {
-            {1.0f, 0.0f, xIncrease},
-            {0.0f, 1.0f, yIncrease},
-            {0.0f, 0.0f, 1.0f}
-        };
-
-        // Aplicando a translação a cada ponto do polígono
-        for (int i = 0; i < nPoints; ++i) {
-            // Adicionando as coordenadas do ponto como uma coluna
-            vector<vector<float>> pointMatrix = {
-                {vx[i]},
-                {vy[i]},
-                {1.0f}
-            };
-
-            // Multiplicando a matriz de translação pelo ponto
-            vector<vector<float>> transformedPoint = multiplyMatrices(translationMatrix, pointMatrix);
-
-            // Atualizando as coordenadas do ponto no polígono
-            vx[i] = transformedPoint[0][0];
-            vy[i] = transformedPoint[1][0];
+    virtual void translateBy(float xIncrease, float yIncrease,
+                             float zIncrease) {
+        for (int i = 0; i < nPoints; i++) {
+            vertices[i] =
+                translate3DPoint(vertices[i], xIncrease, yIncrease, zIncrease);
         }
     }
 
-    // translada para o ponto
-    virtual void translateTo(float x, float y) {
-        // Calculating the translation offsets
-        float offsetX = x - vx[0];
-        float offsetY = y - vy[0];
-
-        translateBy(offsetX, offsetY);
+    Vector2 *getProjection(float d) {
+        Vector2 *pl_project = new Vector2[nPoints];
+        for (int i = 0; i < nPoints; i++) {
+            pl_project[i] = project3DPoint(vertices[i], d);
+        }
+        return pl_project;
     }
-       
-public:
+
+  public:
     Polygon(int nPoints) {
         r = 1;
         g = 0;
         b = 0;
-        visible = false;
         indexColor = 2;
         angle = 0;
         colorScale = INDEX14;
-        
+
         this->nPoints = nPoints;
         for (int i = 0; i < nPoints; i++) {
-            vx.push_back(0);
-            vy.push_back(0);
+            vertices.push_back(Vector3(0, 0, 0));
         }
     }
 
     virtual ~Polygon() {}
 
-    virtual void render() {
+    virtual void render(float d) {
         CV::translate(0, 0);
-        if (colorScale == RGBA) CV::color(r,g,b);
-        else if (colorScale == INDEX14)  CV::color(indexColor);
+        if (colorScale == RGBA)
+            CV::color(r, g, b);
+        else if (colorScale == INDEX14)
+            CV::color(indexColor);
 
-        CV::polygonFill(vx.data(), vy.data(), nPoints);
+        Vector2 *pl_project = getProjection(d);
+        for (int i = 0; i < nPoints - 1; i++) {
+            CV::line(pl_project[i].x, pl_project[i].y, pl_project[i + 1].x,
+                     pl_project[i + 1].y);
+        }
+        // Conecta o último vértice ao primeiro vértice para fechar o polígono
+        CV::line(pl_project[nPoints - 1].x, pl_project[nPoints - 1].y,
+                 pl_project[0].x, pl_project[0].y);
     }
 
     void setColor(float r, float g, float b) {
@@ -108,135 +94,17 @@ public:
         colorScale = INDEX14;
     }
 
-    float getColorR() {
-        return r;
-    }
+    float getColorR() { return r; }
 
-    float getColorG() {
-        return g;
-    }
+    float getColorG() { return g; }
 
-    float getColorB() {
-        return b;
-    }
+    float getColorB() { return b; }
 
-    int getIndexColor() {
-        return indexColor;
-    }
+    int getIndexColor() { return indexColor; }
 
-    int getColorScale() {
-        return colorScale;
-    }
+    int getColorScale() { return colorScale; }
 
-    float getAngle() {
-        return angle;
-    }
-
-    vector<float> getVx() {
-        return vx;
-    }
-
-    vector<float> getVy() {
-        return vy;
-    }
-
-    void setVisible() {
-        visible = true;
-    }
-    void setUnvisible() {
-        visible = false;
-    }
-
-    bool isVisible() {
-        return visible;
-    }
-
-    // Algorimo Ray Casting de detecção de colisão entre polígono e ponto
-    virtual bool hasPointCollided(int x, int y) {
-        int n = nPoints;
-        int count = 0;
-
-        for (int i = 0; i < n; i++) {
-            float x1 = vx[i];
-            float y1 = vy[i];
-            float x2 = vx[(i + 1) % n];
-            float y2 = vy[(i + 1) % n];
-            
-            if ((y1 > y) != (y2 > y) && (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1)) {
-                count++;
-            }    
-        }
-        return count % 2 == 1;
-    }
-
-    // Algoritmo SAT de detecção de colisão entre polígonos
-     bool hasPolygonCollided(const vector<float>& vx1, const vector<float>& vy1) {
-        vector<float> combinedVx = vx;
-        vector<float> combinedVy = vy;
-        combinedVx.insert(combinedVx.end(), vx1.begin(), vx1.end());
-        combinedVy.insert(combinedVy.end(), vy1.begin(), vy1.end());
-
-        
-        for (int i = 0; i < nPoints; i++) {
-            int nextIndex = (i + 1) % nPoints;
-
-            float edgeX = vx[i] - vx[nextIndex];
-            float edgeY = vy[i] - vy[nextIndex];
-
-            float perpendicularX = -edgeY;
-            float perpendicularY = edgeX;
-
-            float magnitude = sqrt(perpendicularX * perpendicularX + perpendicularY * perpendicularY);
-            perpendicularX /= magnitude;
-            perpendicularY /= magnitude;
-
-            float minProjectionA = FLT_MAX;
-            float maxProjectionA = -FLT_MAX;
-            float minProjectionB = FLT_MAX;
-            float maxProjectionB = -FLT_MAX;
-
-            for (int j = 0; j < combinedVx.size(); j++) {
-                float projection = combinedVx[j] * perpendicularX + combinedVy[j] * perpendicularY;
-
-                if (j < nPoints) {
-                    minProjectionA = min(minProjectionA, projection);
-                    maxProjectionA = max(maxProjectionA, projection);
-                } else {
-                    minProjectionB = min(minProjectionB, projection);
-                    maxProjectionB = max(maxProjectionB, projection);
-                }
-            }
-            if (!(maxProjectionB >= minProjectionA && maxProjectionA >= minProjectionB)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    virtual float getCenterX() {
-        float sum = 0;
-        for (int i = 0; i < nPoints; i++) {
-           sum += vx[i]; 
-        }
-
-        return sum / nPoints;
-    }
-
-    virtual float getCenterY() {
-        float sum = 0;
-        for (int i = 0; i < nPoints; i++) {
-           sum += vy[i]; 
-        }
-
-        return sum / nPoints;
-    }
-
-    // algumas funções virtuais que são inerentes a todas as instâncias da classe mas
-    // que serão sobrescritas
-    virtual void rotate(float mx, float my) {}
-    virtual void setVisible(float x, float y) {}
-    virtual void setOffset(float x, float y) {}
+    float getAngle() { return angle; }
 };
 
 #endif // FIGURA_H_INCLUDED
