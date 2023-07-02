@@ -29,5 +29,38 @@
 1426372440 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1688318469 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\vector2.h
+1688320686 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\vector2.h
+	<cmath>
+	<stdio.h>
+
+1688320923 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\main.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<cmath>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<fstream>
+	"gl_canvas2d.h"
+	"math_utils.h"
+	"Vector3.h"
+	"Vector2.h"
+
+1688321457 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\math_utils.h
+	"Vector2.h"
+	"Vector3.h"
+	"constants.h"
+	<ctime>
+	<math.h>
+	<random>
+	<vector>
+
+1688320680 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\vector3.h
+	<cmath>
+	<stdio.h>
+
+1688318819 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\constants.h
+
+1688321452 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\math_utils.cpp
+	"math_utils.h"
 

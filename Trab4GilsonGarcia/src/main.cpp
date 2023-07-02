@@ -13,18 +13,16 @@
 #include <fstream>
 
 #include "gl_canvas2d.h"
+#include "math_utils.h"
+#include "Vector3.h"
+#include "Vector2.h"
 
 using namespace std;
 
 #define X_AXIS_LEN 400
 #define Y_AXIS_LEN 400 
 
-struct Vector3 {
-   float x, y, z;
-};
-
 Vector3 entrada[8];
-
 
 float x = 100;
 float y = 100;
@@ -49,62 +47,6 @@ void arrcopy(float *origin, float* dest, int tam){
    }
 }
 
-// translada um quadrado para algum ponto. offset define o pivot
-void translateSquare(float *qx, float *qy, float pivotX, float pivotY) {
-   for (int i = 0; i < 4; i++) {
-      qx[i] += pivotX;
-      qy[i] += pivotY;
-   }
-}
-
-float getCenterX(float * vx, int nPoints) {
-   float sum = 0;
-   for (int i = 0; i < nPoints; i++) {
-      sum += vx[i]; 
-   }
-
-   return sum / nPoints;
-}
-
-float getCenterY(float * vy, int nPoints) {
-   float sum = 0;
-   for (int i = 0; i < nPoints; i++) {
-      sum += vy[i]; 
-   }
-
-   return sum / nPoints;
-}
-
-void rotatePoint(float& x1, float& y1, float angle) {
-   // Converte o ângulo para radianos
-   float rad = (angle) * PI / 180.0;
-
-   // Rotaciona o ponto utilizando a matriz de rotação
-   float newX = x1 * cos(rad) + y1 * (-sin(rad));
-   float newY = x1 * sin(rad) + y1 * cos(rad);
-
-   x1 = newX;
-   y1 = newY;
-}
-
-
-// rotaciona todos os pontos de um rect
-void rotateRect(float* qx, float* qy, float angle) {
-   for (int i = 0; i < 4; i++) {
-      rotatePoint(qx[i], qy[i], angle);
-   }
-}
-
-Vector2 project(Vector3 v, float d) {
-   Vector2 v2;
-   v2.x = v.x * d / (v.z + d);
-   v2.y = v.y * d / (v.z + d);
-
-   return v2;
-}
-
-
-
 void drawCube(Vector2 cube[8]) {
    int secCount = 5;
    for (int i = 1; i < 4; i++) {
@@ -123,26 +65,6 @@ void drawCube(Vector2 cube[8]) {
    }
 }
 
-Vector3 rotatePointAroundYAxis(Vector3 p, double angle) {
-    Vector3 rotatedPoint;
-    
-    // Conversão do ângulo de graus para radianos
-    double theta = angle * PI / 180.0;
-    
-    // Matriz de rotação em torno do eixo y
-    double rotationMatrix[3][3] = {
-        {cos(theta), 0, sin(theta)},
-        {0, 1, 0},
-        {-sin(theta), 0, cos(theta)}
-    };
-    
-    // Realiza a multiplicação da matriz de rotação pelo ponto
-    rotatedPoint.x = rotationMatrix[0][0] * p.x + rotationMatrix[0][1] * p.y + rotationMatrix[0][2] * p.z;
-    rotatedPoint.y = rotationMatrix[1][0] * p.x + rotationMatrix[1][1] * p.y + rotationMatrix[1][2] * p.z;
-    rotatedPoint.z = rotationMatrix[2][0] * p.x + rotationMatrix[2][1] * p.y + rotationMatrix[2][2] * p.z;
-    
-    return rotatedPoint;
-}
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
 //Todos os comandos para desenho na canvas devem ser chamados dentro da render().
 //Deve-se manter essa fun��o com poucas linhas de codigo.
@@ -154,7 +76,9 @@ void render()
 
    for (int i = 0; i < 8; i++) {
       p = entrada[i];
+      p = rotatePointAroundZAxis(p, angle);
       p = rotatePointAroundYAxis(p, angle);
+      p = translate3DPoint(p, 0, 0, d + 100);
       saida[i] = project(p, d);
    }
 

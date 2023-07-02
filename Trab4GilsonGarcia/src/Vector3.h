@@ -1,6 +1,9 @@
 #ifndef __VECTOR_3_H__
 #define __VECTOR_3_H__
 
+#include <cmath>
+#include <stdio.h>
+
 class Vector3 {
 public:
   float x, y, z;
