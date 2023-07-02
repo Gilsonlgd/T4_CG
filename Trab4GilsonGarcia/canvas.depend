@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1682597800 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1682597814 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	"Vector2.h"
+
+1426372440 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\include\gl\glut.h
+	"freeglut_std.h"
+
+1437579942 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426372440 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1688318469 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\vector2.h
+
