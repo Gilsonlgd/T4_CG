@@ -54,6 +54,9 @@ void rotatePoint(float &x1, float &y1, float pivotX, float pivotY, float angle);
 void rotatePoints(float *vx, float *vy, int nPoints, float pivotX, float pivotY,
                   float angle);
 
+void rotatePoints(Vector3* points, int nPoints, float pivotX, float pivotY,
+                  float angle);
+
 // calcula o módulo de um vetor
 float calculateMagnitude(float x, float y);
 
@@ -66,6 +69,13 @@ Vector3 rotatePointAroundXAxis(Vector3 p, double angle);
 
 Vector3 rotatePointAroundZAxis(Vector3 p, double angle);
 
+Vector3 rotatePointAroundYAxis(Vector3 p, double angle, Vector3 pivot);
+
+Vector3 rotatePointAroundXAxis(Vector3 p, double angle, Vector3 pivot);
+
+Vector3 rotatePointAroundZAxis(Vector3 p, double angle, Vector3 pivot);
+
 Vector3 translate3DPoint(Vector3 p, float dx, float dy, float dz);
+
 
 #endif // MATH_UTILS_H

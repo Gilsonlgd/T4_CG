@@ -41,6 +41,10 @@ class Circle : public Polygon {
         CV::translate(0, 0);
     }
 
+    void rotate(float angle, float cx, float cy) {
+        rotatePoint(vertices[0].x, vertices[0].y, cx, cy, angle);
+    }
+
     float getCenterX() { return vertices[0].x; }
     float getCenterY() { return vertices[0].y; }
 

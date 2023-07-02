@@ -116,6 +116,31 @@ void rotatePoints(float *vx, float *vy, int nPoints, float pivotX, float pivotY,
     }
 }
 
+void rotatePoints(Vector3* points, int nPoints, float pivotX, float pivotY,
+                  float angle) {
+    // Converte o ângulo para radianos
+    float rad = (angle)*PI / 180.0;
+
+    float rotMatrix[2][2] = {{cos(rad), -sin(rad)}, {sin(rad), cos(rad)}};
+
+    for (int i = 0; i < nPoints; i++) {
+        // Translada o ponto para o ponto de pivot
+        points[i].x -= pivotX;
+        points[i].y -= pivotY;
+
+        // Rotaciona o ponto utilizando a matriz de rotação
+        float x = points[i].x * rotMatrix[0][0] + points[i].y * rotMatrix[0][1];
+        float y = points[i].x * rotMatrix[1][0] + points[i].y * rotMatrix[1][1];
+
+        points[i].x = x;
+        points[i].y = y;
+
+        // Translada o ponto de volta para a sua posição original
+        points[i].x += pivotX;
+        points[i].y += pivotY;
+    }
+}
+
 float calculateMagnitude(float x, float y) { return sqrt(x * x + y * y); }
 
 // avalia bezier de grau 2
@@ -229,4 +254,94 @@ Vector3 translate3DPoint(Vector3 p, float dx, float dy, float dz) {
     translatedPoint.z = transformedPoint[2][0];
 
     return translatedPoint;
+}
+
+Vector3 rotatePointAroundYAxis(Vector3 p, double angle, Vector3 pivot) {
+    Vector3 translatedPoint = {p.x - pivot.x, p.y - pivot.y, p.z - pivot.z};
+    Vector3 rotatedPoint;
+
+    // Conversão do ângulo de graus para radianos
+    double theta = angle * PI / 180.0;
+
+    // Matriz de rotação em torno do eixo y
+    double rotationMatrix[3][3] = {
+        {cos(theta), 0, sin(theta)}, {0, 1, 0}, {-sin(theta), 0, cos(theta)}};
+
+    // Realiza a multiplicação da matriz de rotação pelo ponto
+    rotatedPoint.x = rotationMatrix[0][0] * translatedPoint.x +
+                     rotationMatrix[0][1] * translatedPoint.y +
+                     rotationMatrix[0][2] * translatedPoint.z;
+    rotatedPoint.y = rotationMatrix[1][0] * translatedPoint.x +
+                     rotationMatrix[1][1] * translatedPoint.y +
+                     rotationMatrix[1][2] * translatedPoint.z;
+    rotatedPoint.z = rotationMatrix[2][0] * translatedPoint.x +
+                     rotationMatrix[2][1] * translatedPoint.y +
+                     rotationMatrix[2][2] * translatedPoint.z;
+
+    // Translada o ponto de volta para a posição original
+    rotatedPoint.x += pivot.x;
+    rotatedPoint.y += pivot.y;
+    rotatedPoint.z += pivot.z;
+
+    return rotatedPoint;
+}
+
+Vector3 rotatePointAroundXAxis(Vector3 p, double angle, Vector3 pivot) {
+    Vector3 translatedPoint = {p.x - pivot.x, p.y - pivot.y, p.z - pivot.z};
+    Vector3 rotatedPoint;
+
+    // Conversão do ângulo de graus para radianos
+    double theta = angle * PI / 180.0;
+
+    // Matriz de rotação em torno do eixo x
+    double rotationMatrix[3][3] = {
+        {1, 0, 0}, {0, cos(theta), -sin(theta)}, {0, sin(theta), cos(theta)}};
+
+    // Realiza a multiplicação da matriz de rotação pelo ponto
+    rotatedPoint.x = rotationMatrix[0][0] * translatedPoint.x +
+                     rotationMatrix[0][1] * translatedPoint.y +
+                     rotationMatrix[0][2] * translatedPoint.z;
+    rotatedPoint.y = rotationMatrix[1][0] * translatedPoint.x +
+                     rotationMatrix[1][1] * translatedPoint.y +
+                     rotationMatrix[1][2] * translatedPoint.z;
+    rotatedPoint.z = rotationMatrix[2][0] * translatedPoint.x +
+                     rotationMatrix[2][1] * translatedPoint.y +
+                     rotationMatrix[2][2] * translatedPoint.z;
+
+    // Translada o ponto de volta para a posição original
+    rotatedPoint.x += pivot.x;
+    rotatedPoint.y += pivot.y;
+    rotatedPoint.z += pivot.z;
+
+    return rotatedPoint;
+}
+
+Vector3 rotatePointAroundZAxis(Vector3 p, double angle, Vector3 pivot) {
+    Vector3 translatedPoint = {p.x - pivot.x, p.y - pivot.y, p.z - pivot.z};
+    Vector3 rotatedPoint;
+
+    // Conversão do ângulo de graus para radianos
+    double theta = angle * PI / 180.0;
+
+    // Matriz de rotação em torno do eixo z
+    double rotationMatrix[3][3] = {
+        {cos(theta), -sin(theta), 0}, {sin(theta), cos(theta), 0}, {0, 0, 1}};
+
+    // Realiza a multiplicação da matriz de rotação pelo ponto
+    rotatedPoint.x = rotationMatrix[0][0] * translatedPoint.x +
+                     rotationMatrix[0][1] * translatedPoint.y +
+                     rotationMatrix[0][2] * translatedPoint.z;
+    rotatedPoint.y = rotationMatrix[1][0] * translatedPoint.x +
+                     rotationMatrix[1][1] * translatedPoint.y +
+                     rotationMatrix[1][2] * translatedPoint.z;
+    rotatedPoint.z = rotationMatrix[2][0] * translatedPoint.x +
+                     rotationMatrix[2][1] * translatedPoint.y +
+                     rotationMatrix[2][2] * translatedPoint.z;
+
+    // Translada o ponto de volta para a posição original
+    rotatedPoint.x += pivot.x;
+    rotatedPoint.y += pivot.y;
+    rotatedPoint.z += pivot.z;
+
+    return rotatedPoint;
 }
