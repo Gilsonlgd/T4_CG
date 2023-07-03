@@ -14,8 +14,7 @@ conhecimentos de OpenGL para usar.
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Circle.h"
-#include "Crank.h"
+#include "Engine.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "gl_canvas2d.h"
@@ -45,6 +44,8 @@ int screenWidth = 1200,
 int mouseX,
     mouseY; // variaveis globais do mouse para poder exibir dentro da render().
 bool alreadyTransformed = false;
+
+Engine* engine;
 
 // copia uma array para o outro
 void arrcopy(float *origin, float *dest, int tam) {
@@ -77,16 +78,9 @@ void drawCube(Vector2 cube[8]) {
 // dentro da render(). Deve-se manter essa fun��o com poucas linhas de codigo.
 float angle = 0.0;
 
-float r = 100;
-Circle *virabrequim = new Circle(10, r *cos(0.0) + 500, r *sin(0.0) + 200);
-Crank *crank = new Crank(100, 500, 200, 0);
-
 void render() {
-    crank->render();
-    crank->rotate(2.5);
-
-    /*virabrequim->render();
-    virabrequim->rotate(2.5, 500, 200);*/
+    engine->render();
+    engine->update();
 }
 
 // funcao chamada toda vez que uma tecla for pressionada.
@@ -117,41 +111,8 @@ void mouse(int button, int state, int wheel, int direction, int x, int y) {
 }
 
 int main(void) {
-    for (int i = 0; i < 8; i++) {
-        entrada[i] = *new Vector3();
-    }
+    engine = new Engine(2.5, 500, 200, 0);
 
-    entrada[0].x = -width / 2;
-    entrada[0].y = -height / 2;
-    entrada[0].z = -deth / 2;
-
-    entrada[1].x = width / 2;
-    entrada[1].y = -height / 2;
-    entrada[1].z = -deth / 2;
-
-    entrada[2].x = width / 2;
-    entrada[2].y = height / 2;
-    entrada[2].z = -deth / 2;
-
-    entrada[3].x = -width / 2;
-    entrada[3].y = height / 2;
-    entrada[3].z = -deth / 2;
-
-    entrada[4].x = -width / 2;
-    entrada[4].y = -height / 2;
-    entrada[4].z = deth / 2;
-
-    entrada[5].x = width / 2;
-    entrada[5].y = -height / 2;
-    entrada[5].z = deth / 2;
-
-    entrada[6].x = width / 2;
-    entrada[6].y = height / 2;
-    entrada[6].z = deth / 2;
-
-    entrada[7].x = -width / 2;
-    entrada[7].y = height / 2;
-    entrada[7].z = deth / 2;
 
     CV::init(&screenWidth, &screenHeight, "");
     CV::run();

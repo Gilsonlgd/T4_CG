@@ -37,6 +37,10 @@ public:
     z /= norm;
   }
 
+  float dot(Vector3 v) { return x * v.x + y * v.y + z * v.z; }
+
+  float length() { return (float)sqrt(x * x + y * y + z * z); }
+
   Vector3 operator-(const Vector3 &v) const {
     Vector3 aux(x - v.x, y - v.y, z - v.z);
     return aux;

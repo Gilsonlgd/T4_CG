@@ -40,8 +40,10 @@ class Crank : public Polygon {
         this->vertices[1] = Vector3(x + center_radius*1.5, y - 20, 0);
         this->vertices[2] = Vector3(x + center_radius*1.5, y + 20, 0);
         this->vertices[3] = Vector3(x - center_radius/3.0, y + center_radius, 0);
+        rotatePoints(vertices.data(), nPoints, position.x, position.y, 90);
 
-        this->connectingRod = Vector3(x + center_radius*1.2, y, 0);
+        this->connectingRod = Vector3(x, y + center_radius, 0);
+        
     }
 
     void render() {
@@ -59,7 +61,6 @@ class Crank : public Polygon {
         CV::color(0, 0, 255);
         CV::circle(connectingRod.x, connectingRod.y, r/10, 50);
 
-        
     }
 
     void rotate(float angle, float cx, float cy) {
@@ -70,6 +71,18 @@ class Crank : public Polygon {
     void rotate(float angle) {
         rotatePoints(vertices.data(), nPoints, position.x, position.y, angle);
         rotatePoints(&connectingRod, 1, position.x, position.y, angle);
+    }
+
+    Vector3 getConnectionPoint() {
+        return connectingRod;
+    }
+
+    Vector3 getCenter() {
+        return position;
+    }
+
+    float getRadius() {
+        return r/3.0;
     }
 
 };

@@ -49,6 +49,8 @@ float dist(float x1, float y1, float x2, float y2);
 // angulo em graus entre dois vetores
 float angleDEG(float x1, float y1, float x2, float y2);
 
+float angleDEG(const Vector2 v1, const Vector2 v2);
+
 void rotatePoint(float &x1, float &y1, float pivotX, float pivotY, float angle);
 
 void rotatePoints(float *vx, float *vy, int nPoints, float pivotX, float pivotY,
@@ -60,7 +62,15 @@ void rotatePoints(Vector3* points, int nPoints, float pivotX, float pivotY,
 // calcula o módulo de um vetor
 float calculateMagnitude(float x, float y);
 
+float calculateTriangleSegmentB(float a, float c, float angle);
+
+float calculateTriangleSegmentA(float b, float c, float angle);
+
+float calculateTriangleSegmentC(float a, float b, float angle);
+
 // 3D
+float angleDEG(const Vector3 v1, const Vector3 v2);
+
 Vector2 project3DPoint(Vector3 v, float d);
 
 Vector3 rotatePointAroundYAxis(Vector3 p, double angle);

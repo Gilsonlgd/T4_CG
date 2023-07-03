@@ -66,6 +66,27 @@ float angleDEG(float x1, float y1, float x2, float y2) {
     return (atan2(y1, x1) - atan2(y2, x2)) * 180.0 / PI;
 }
 
+float angleDEG(const Vector2 v1, const Vector2 v2) {
+    return angleDEG(v1.x, v1.y, v2.x, v2.y);
+} 
+
+float angleDEG(const Vector3 v1, const Vector3 v2) {
+    float dotProduct = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    float magnitudeProduct = std::sqrt(
+        (v1.x * v1.x + v1.y * v1.y + v1.z * v1.z) *
+        (v2.x * v2.x + v2.y * v2.y + v2.z * v2.z)
+    );
+
+    // Proteção contra valores muito próximos de zero
+    if (magnitudeProduct < 1e-8) {
+        return 0.0f;
+    }
+
+    float angleRad = std::acos(dotProduct / magnitudeProduct);
+    float angleDeg = angleRad * 180.0f / PI;
+    return angleDeg;
+}
+
 // rotaciona em angle um ponto (x1, y1) com relação a um pivot
 // recebe o angle em graus e transforma para RAD
 void rotatePoint(float &x1, float &y1, float pivotX, float pivotY,
@@ -344,4 +365,22 @@ Vector3 rotatePointAroundZAxis(Vector3 p, double angle, Vector3 pivot) {
     rotatedPoint.z += pivot.z;
 
     return rotatedPoint;
+}
+
+float calculateTriangleSegmentB(float a, float c, float angle) {
+    float angleRad = angle * PI / 180.0;
+    // Lei dos cossenos
+    return sqrt(pow(a, 2) + pow(c, 2) - 2 * a * c * cos(angleRad));
+}
+
+float calculateTriangleSegmentA(float b, float c, float angle) {
+    float angleRad = angle * PI / 180.0;
+    // Lei dos cossenos
+    return sqrt(pow(b, 2) + pow(c, 2) - 2 * b * c * cos(angleRad));
+}
+
+float calculateTriangleSegmentC(float a, float b, float angle) {
+    float angleRad = angle * PI / 180.0;
+    // Lei dos cossenos
+    return sqrt(pow(a, 2) + pow(b, 2) - 2 * a * b * cos(angleRad));
 }
