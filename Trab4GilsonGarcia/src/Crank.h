@@ -36,10 +36,10 @@ class Crank : public Polygon {
     Crank(float center_radius, float x, float y, float z) : Polygon(4) {
         this->position = Vector3(x, y, z);
         this->r = center_radius;
-        this->vertices[0] = Vector3(x - center_radius/3.0, y - center_radius, 0);
-        this->vertices[1] = Vector3(x + center_radius*1.5, y - 20, 0);
-        this->vertices[2] = Vector3(x + center_radius*1.5, y + 20, 0);
-        this->vertices[3] = Vector3(x - center_radius/3.0, y + center_radius, 0);
+        this->vertices[0] = Vector3(x - center_radius/3.0, y - center_radius, 1);
+        this->vertices[1] = Vector3(x + center_radius*1.5, y - 20, 1);
+        this->vertices[2] = Vector3(x + center_radius*1.5, y + 20, 1);
+        this->vertices[3] = Vector3(x - center_radius/3.0, y + center_radius, 1);
         rotatePoints(vertices.data(), nPoints, position.x, position.y, 90);
 
         this->connectingRod = Vector3(x, y + center_radius, 0);

@@ -27,12 +27,12 @@ class ConnectingRod {
         CV::translate(0, 0);
         CV::color(0);
         CV::line(pistonPin.x, pistonPin.y, crankPin.x, crankPin.y);
-        char *len = new char[10];
 
+        /*char *lenn = new char[10];
         Vector3 vet = pistonPin - crankPin;
-        sprintf(len, "%.2f", vet.length());
+        sprintf(lenn, "%.2f", vet.length());
 
-        CV::text(pistonPin.x, pistonPin.y, len);
+        CV::text(pistonPin.x, pistonPin.y, lenn);*/
     }
 
     void update(Vector3 crankPin, Vector3 crankPosition) {
@@ -40,8 +40,8 @@ class ConnectingRod {
         
         float radius = (crankPin - crankPosition).length();
         Vector3 crankPinToPistonPin = crankPin - pistonPin;
-        float angle = angleDEG(crankPinToPistonPin, crankPin - crankPosition);
 
+        float angle = angleDEG(crankPinToPistonPin, crankPin - crankPosition);
         pistonPin.y = crankPosition.y + calculateTriangleSegmentB(radius, len, angle);
     }
 

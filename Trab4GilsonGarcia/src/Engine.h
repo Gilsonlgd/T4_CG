@@ -7,7 +7,7 @@
 #include "math_utils.h"
 
 
-#define CONNECTING_ROD_LEN 300
+#define CONNECTING_ROD_LEN 200
 
 /*
 ##### Motor #####
