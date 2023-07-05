@@ -12,25 +12,9 @@ Implementa a manivela do motor
 
 class Crank : public Polygon {
     Vector3 position; //pivot de rotação da manivela
-    Vector3 connectingRod; //ponta da biela
+    Vector3 connectionPin; //ponta da biela
 
     float r = 0.0f;
-    
-    float* getXVertices() {
-        float* xVertices = new float[nPoints];
-        for (int i = 0; i < nPoints; i++) {
-            xVertices[i] = vertices[i].x;
-        }
-        return xVertices;
-    }
-
-    float* getYVertices() {
-        float* yVertices = new float[nPoints];
-        for (int i = 0; i < nPoints; i++) {
-            yVertices[i] = vertices[i].y;
-        }
-        return yVertices;
-    }
 
   public:
     Crank(float center_radius, float x, float y, float z) : Polygon(4) {
@@ -42,7 +26,7 @@ class Crank : public Polygon {
         this->vertices[3] = Vector3(x - center_radius/3.0, y + center_radius, 1);
         rotatePoints(vertices.data(), nPoints, position.x, position.y, 90);
 
-        this->connectingRod = Vector3(x, y + center_radius, 0);
+        this->connectionPin = Vector3(x, y + center_radius, 0);
         
     }
 
@@ -59,22 +43,22 @@ class Crank : public Polygon {
         CV::circle(position.x, position.y, r/10, 50);
 
         CV::color(0, 0, 255);
-        CV::circle(connectingRod.x, connectingRod.y, r/10, 50);
+        CV::circle(connectionPin.x, connectionPin.y, r/10, 50);
 
     }
 
     void rotate(float angle, float cx, float cy) {
         rotatePoints(vertices.data(), nPoints, cx, cy, angle);
-        rotatePoints(&connectingRod, 1, cx, cy, angle);
+        rotatePoints(&connectionPin, 1, cx, cy, angle);
     }
 
     void rotate(float angle) {
         rotatePoints(vertices.data(), nPoints, position.x, position.y, angle);
-        rotatePoints(&connectingRod, 1, position.x, position.y, angle);
+        rotatePoints(&connectionPin, 1, position.x, position.y, angle);
     }
 
     Vector3 getConnectionPoint() {
-        return connectingRod;
+        return connectionPin;
     }
 
     Vector3 getCenter() {

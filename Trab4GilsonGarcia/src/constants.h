@@ -29,4 +29,8 @@ Algumas constantes interessantes
 #define INDEX14 1
 #define CONTRAST_BOUND_COLOR 135, 206, 250
 
+// Teclado
+#define UP 201
+#define DOWN 203
+
 #endif // CONSTANTS_H_INCLUDED

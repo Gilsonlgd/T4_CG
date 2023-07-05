@@ -89,7 +89,15 @@ void keyboard(int key) {
         opcao = key;
     }
 
-    switch (key) {}
+    switch (key) {
+        case UP:
+            engine->speedUP();
+        break;
+        case DOWN:
+            engine->speedDOWN();
+        break;
+    }
+    
 }
 
 // funcao chamada toda vez que uma tecla for liberada

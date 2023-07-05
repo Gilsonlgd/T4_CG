@@ -48,6 +48,22 @@ class Polygon {
         return pl_project;
     }
 
+    float* getXVertices() {
+        float* xVertices = new float[nPoints];
+        for (int i = 0; i < nPoints; i++) {
+            xVertices[i] = vertices[i].x;
+        }
+        return xVertices;
+    }
+
+    float* getYVertices() {
+        float* yVertices = new float[nPoints];
+        for (int i = 0; i < nPoints; i++) {
+            yVertices[i] = vertices[i].y;
+        }
+        return yVertices;
+    }
+
   public:
     Polygon(int nPoints) {
         r = 1;

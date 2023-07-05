@@ -8,6 +8,7 @@
 
 
 #define CONNECTING_ROD_LEN 200
+#define SPEED_UP 0.25
 
 /*
 ##### Motor #####
@@ -38,6 +39,14 @@ class Engine {
     void update() {
         crank->rotate(speed);
         connectingRod->update(crank->getConnectionPoint(), crank->getCenter());
+    }
+
+    void speedUP() {
+        speed += SPEED_UP;
+    }
+
+    void speedDOWN() {
+        speed -= SPEED_UP;
     }
 };
 

@@ -29,7 +29,7 @@
 1426372440 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\include\gl\freeglut_ext.h
 	<stdarg.h>
 
-1688328797 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\vector2.h
+1688522016 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\vector2.h
 	<cmath>
 	<stdio.h>
 
@@ -56,11 +56,12 @@
 	<random>
 	<vector>
 
-1688344369 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\vector3.h
+1688514527 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\vector3.h
+	"Vector2.h"
 	<cmath>
 	<stdio.h>
 
-1688318819 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\constants.h
+1688522782 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\constants.h
 
 1688390604 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
@@ -71,7 +72,7 @@
 	"constants.h"
 	<cmath>
 
-1688329203 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\polygon.h
+1688507151 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\polygon.h
 	"Vector3.h"
 	"constants.h"
 	"gl_canvas2d.h"
@@ -81,7 +82,7 @@
 	<iostream>
 	<vector>
 
-1688390790 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\crank.h
+1688508073 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\crank.h
 	"Polygon.h"
 	"math_utils.h"
 
@@ -91,7 +92,7 @@
 	"Polygon.h"
 	"math_utils.h"
 
-1688391148 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\connectingrod.h
+1688522609 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\connectingrod.h
 	"Polygon.h"
 	<string>
 

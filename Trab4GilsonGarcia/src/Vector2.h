@@ -5,45 +5,47 @@
 #include <stdio.h>
 
 class Vector2 {
-public:
-  float x, y;
+  public:
+    float x, y;
 
-  Vector2() { x = y = 0; }
+    Vector2() { x = y = 0; }
 
-  Vector2(float _x, float _y) {
-    x = _x;
-    y = _y;
-  }
-
-  void set(float _x, float _y) {
-    x = _x;
-    y = _y;
-  }
-
-  void normalize() {
-    float norm = (float)sqrt(x * x + y * y);
-
-    if (norm == 0.0) {
-      printf("\n\nNormalize::Divisao por zero");
-      x = 1;
-      y = 1;
-      return;
+    Vector2(float _x, float _y) {
+        x = _x;
+        y = _y;
     }
-    x /= norm;
-    y /= norm;
-  }
 
-  Vector2 operator-(const Vector2 &v) {
-    Vector2 aux(x - v.x, y - v.y);
-    return (aux);
-  }
+    void set(float _x, float _y) {
+        x = _x;
+        y = _y;
+    }
 
-  Vector2 operator+(const Vector2 &v) {
-    Vector2 aux(x + v.x, y + v.y);
-    return (aux);
-  }
+    void normalize() {
+        float norm = (float)sqrt(x * x + y * y);
 
-  // Adicionem os demais overloads de operadores aqui.
+        if (norm == 0.0) {
+            printf("\n\nNormalize::Divisao por zero");
+            x = 1;
+            y = 1;
+            return;
+        }
+        x /= norm;
+        y /= norm;
+    }
+
+    float length() { return (float)sqrt(x * x + y * y); }
+
+    Vector2 operator-(const Vector2 &v) {
+        Vector2 aux(x - v.x, y - v.y);
+        return (aux);
+    }
+
+    Vector2 operator+(const Vector2 &v) {
+        Vector2 aux(x + v.x, y + v.y);
+        return (aux);
+    }
+
+    // Adicionem os demais overloads de operadores aqui.
 };
 
 #endif
