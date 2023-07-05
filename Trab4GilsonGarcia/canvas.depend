@@ -33,7 +33,7 @@
 	<cmath>
 	<stdio.h>
 
-1688390811 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\main.cpp
+1688522877 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<cmath>
@@ -86,13 +86,18 @@
 	"Polygon.h"
 	"math_utils.h"
 
-1688389641 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\engine.h
+1688524848 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\engine.h
 	"ConnectingRod.h"
 	"Crank.h"
 	"Polygon.h"
+	"Piston.h"
 	"math_utils.h"
 
-1688522609 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\connectingrod.h
+1688564530 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\connectingrod.h
 	"Polygon.h"
 	<string>
+
+1688524764 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\piston.h
+	"Polygon.h"
+	"math_utils.h"
 

@@ -10,11 +10,11 @@ Implementa a biela
 ########################
 */
 
-#define BASE_WIDTH 40
-#define BASE_HEIGHT 40
+#define BASE_WIDTH 80
+#define BASE_HEIGHT 80
 
-#define CONNECTION_INITIAL_WIDTH 20
-#define CONNECTION_FINAL_WIDTH 10
+#define CONNECTION_INITIAL_WIDTH 40
+#define CONNECTION_FINAL_WIDTH 15
 
 class ConnectingRod : public Polygon {
     float len;
