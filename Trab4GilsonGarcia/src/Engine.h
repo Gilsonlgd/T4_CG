@@ -44,7 +44,7 @@ class Engine {
 
         this->rightPiston = new Piston(rightConnectingRod->getPistonPin(), -V_ANGLE);
 
-        // incia o pistão esquerdo
+        // inicia o pistão esquerdo
         this->leftConnectingRod =
             new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE);
 
