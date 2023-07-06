@@ -20,6 +20,7 @@ class ConnectingRod : public Polygon {
     float len;
     Vector3 pistonPin;
     Vector3 crankPin;
+    Vector3 initialPistonPin;
 
     float angle;
 
@@ -48,6 +49,7 @@ class ConnectingRod : public Polygon {
         this->crankPin = crankPin;
 
         this->pistonPin = Vector3(crankPin.x, crankPin.y + len, crankPin.z);
+        this->initialPistonPin = pistonPin - Vector3(0, 100, 0);
         initiateCoordinates();
     }
 
@@ -58,21 +60,20 @@ class ConnectingRod : public Polygon {
         CV::polygon(getXVertices(), getYVertices(), nPoints);
     }
 
-    void update(Vector3 newCrankPin, Vector3 cranckPosition) {
-        this->crankPin = newCrankPin;
+    void update(Vector3 newCrankPin, Vector3 crankPosition) {
+        Vector3 A = crankPosition;
+        Vector3 B = newCrankPin;
+        Vector3 AB = B - A;
+        Vector3 BC = newCrankPin - pistonPin;
 
-        float crankPinToCrankPositionLength =
-            (newCrankPin - cranckPosition).length();
-        Vector3 crankPinToPistonPin = newCrankPin - pistonPin;
-
-        // calcula a distância entre o centro da manivel e o pino do pistão
+        float crankR = AB.length();
+        // calcula a distância entre o centro da manivela e o pino do pistão
         // controla a movimentação do pistão no eixo y
-        float angle =
-            angleDEG(crankPinToPistonPin, newCrankPin - cranckPosition);
+        float angle = angleDEG(AB, BC);
         float lastPistonPinY = pistonPin.y;
-        pistonPin.y = cranckPosition.y +
-                      calculateTriangleSegmentB(crankPinToCrankPositionLength,
-                                                len, angle);
+
+        float AC_Length = calculateTriangleSegmentB(crankR, len, angle);
+        pistonPin.y = A.y + AC_Length;
 
         float deltaY = pistonPin.y - lastPistonPinY;
         translateBy(0, deltaY, 0);
@@ -80,12 +81,14 @@ class ConnectingRod : public Polygon {
         Vector2 pistonPinToCrankPin =
             (newCrankPin - pistonPin).ignoreZCoordinate();
         Vector2 pistonPinToCrankPosition =
-            (cranckPosition - pistonPin).ignoreZCoordinate();
+            (crankPosition - pistonPin).ignoreZCoordinate();
 
         float newAngle =
             -angleDEG(pistonPinToCrankPin, pistonPinToCrankPosition);
         rotate(this->angle - newAngle, pistonPin.x, pistonPin.y);
-        this->angle = newAngle;        
+
+        this->angle = newAngle;
+        this->crankPin = newCrankPin;
     }
 
     void setLen(float len) { this->len = len; }

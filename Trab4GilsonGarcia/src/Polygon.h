@@ -40,6 +40,14 @@ class Polygon {
         }
     }
 
+    // translada para uma posição
+    virtual void translateTo(float x, float y, float z) {
+        float xIncrease = x - vertices[0].x;
+        float yIncrease = y - vertices[0].y;
+        float zIncrease = z - vertices[0].z;
+        translateBy(xIncrease, yIncrease, zIncrease);
+    }
+
     Vector2 *getProjection(float d) {
         Vector2 *pl_project = new Vector2[nPoints];
         for (int i = 0; i < nPoints; i++) {
