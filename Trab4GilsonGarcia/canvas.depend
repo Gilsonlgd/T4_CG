@@ -86,7 +86,7 @@
 	"Polygon.h"
 	"math_utils.h"
 
-1688668483 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\engine.h
+1688670316 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\engine.h
 	"ConnectingRod.h"
 	"Crank.h"
 	"Piston.h"
@@ -94,7 +94,7 @@
 	"math_utils.h"
 	<list>
 
-1688669263 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\connectingrod.h
+1688669507 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\connectingrod.h
 	"Polygon.h"
 	<string>
 

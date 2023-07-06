@@ -73,9 +73,9 @@ class Engine {
         leftPiston->update(leftConnectingRod->getPistonPin());
     }
 
-    void speedUP() { speed += SPEED_UP; }
+    void speedUP() { speed -= SPEED_UP; }
 
-    void speedDOWN() { speed -= SPEED_UP; }
+    void speedDOWN() { speed += SPEED_UP; }
 };
 
 #endif // ENGINE_H_INCLUDED
