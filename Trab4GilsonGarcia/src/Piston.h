@@ -17,22 +17,29 @@ class Piston : public Polygon {
         vertices[3] = Vector3(connectionRodPin.x - PISTON_WIDTH / 2, connectionRodPin.y + PISTON_HEIGHT*2/3, 1);
     }   
   public:
-    Piston(Vector3 connectionRodPin) : Polygon(4) {
+    Piston(Vector3 connectionRodPin, float v_angle) : Polygon(4) {
         this->connectionRodPin = connectionRodPin;
+
         initiateCoordinates();
+        rotate(v_angle, connectionRodPin.x, connectionRodPin.y);
     }
 
     void render() {
         CV::translate(0, 0);
         CV::color(0);
 
-        CV::polygonFill(getXVertices(), getYVertices(), nPoints);
+        CV::polygon(getXVertices(), getYVertices(), nPoints);
     }
 
     void update(Vector3 newConnectionPin) {
+        float deltaX = newConnectionPin.x - connectionRodPin.x;
         float deltaY = newConnectionPin.y - connectionRodPin.y;
-        translateBy(0, deltaY, 0);
+        translateBy(deltaX, deltaY, 0);
         this->connectionRodPin = newConnectionPin;
+    }
+
+    void rotate(float angle, float cx, float cy) {
+        rotatePoints(vertices.data(), nPoints, cx, cy, angle);
     }
 };
 

@@ -16,13 +16,17 @@ Implementa a biela
 #define CONNECTION_INITIAL_WIDTH 40
 #define CONNECTION_FINAL_WIDTH 15
 
+#define CONNECTING_ROD_LEN 235
+
 class ConnectingRod : public Polygon {
-    float len;
     Vector3 pistonPin;
     Vector3 crankPin;
+    Vector3 crankPosition;
     Vector3 initialPistonPin;
 
     float angle;
+    float len;
+    float v_angle;
 
     void initiateCoordinates() {
         vertices[0] =
@@ -44,13 +48,25 @@ class ConnectingRod : public Polygon {
     }
 
   public:
-    ConnectingRod(float len, Vector3 crankPin) : Polygon(8) {
-        this->len = len;
-        this->crankPin = crankPin;
+    ConnectingRod(Vector3 crankPosition, float crankR, float v_angle)
+        : Polygon(8) {
+        this->len = CONNECTING_ROD_LEN;
+        this->v_angle = v_angle;
+
+        this->crankPin = crankPosition + Vector3(0, crankR, 0);
+        this->crankPosition = crankPosition;
 
         this->pistonPin = Vector3(crankPin.x, crankPin.y + len, crankPin.z);
-        this->initialPistonPin = pistonPin - Vector3(0, 100, 0);
+        this->initialPistonPin = pistonPin;
+
         initiateCoordinates();
+
+        rotate(v_angle, crankPin.x, crankPin.y);
+
+        rotatePoint(pistonPin.x, pistonPin.y, crankPin.x, crankPin.y, v_angle);
+
+        rotatePoint(initialPistonPin.x, initialPistonPin.y, crankPin.x,
+                    crankPin.y, v_angle);
     }
 
     void render() {
@@ -67,17 +83,28 @@ class ConnectingRod : public Polygon {
         Vector3 BC = newCrankPin - pistonPin;
 
         float crankR = AB.length();
-        // calcula a distância entre o centro da manivela e o pino do pistão
-        // controla a movimentação do pistão no eixo y
         float angle = angleDEG(AB, BC);
+        float lastPistonPinX = pistonPin.x;
         float lastPistonPinY = pistonPin.y;
 
+        // Inclinação dos pistões
+        float inclineAngle = -v_angle * PI / 180.0; // graus
+
+        // Calcula a nova posição do pistão
         float AC_Length = calculateTriangleSegmentB(crankR, len, angle);
-        pistonPin.y = A.y + AC_Length;
+        pistonPin.x = A.x + AC_Length * sin(inclineAngle);
+        pistonPin.y = A.y + AC_Length * cos(inclineAngle);
 
+        float deltaX = pistonPin.x - lastPistonPinX;
         float deltaY = pistonPin.y - lastPistonPinY;
-        translateBy(0, deltaY, 0);
 
+        translateBy(deltaX, deltaY, 0);
+        // até aqui funciona como deveria
+
+        // no meu motor eu defino a posição do pistão depois rotaciono
+        // a biela de acordo com o angulo entre o ponto do pistão e o pino da
+        // manivela. essa parte da rotação ainda não tá funcionando direito no
+        // motor em V
         Vector2 pistonPinToCrankPin =
             (newCrankPin - pistonPin).ignoreZCoordinate();
         Vector2 pistonPinToCrankPosition =
@@ -99,6 +126,17 @@ class ConnectingRod : public Polygon {
 
     void rotate(float angle, float cx, float cy) {
         rotatePoints(vertices.data(), nPoints, cx, cy, angle);
+    }
+
+    Vector3 getPosition() {
+        float x = 0;
+        float y = 0;
+        for (int i = 3; i <= 6; i++) {
+            x += vertices[i].x;
+            y += vertices[i].y;
+        }
+
+        return Vector3(x / 4, y / 4, 0);
     }
 
     Vector3 getPistonPin() { return pistonPin; }

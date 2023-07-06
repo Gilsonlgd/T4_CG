@@ -66,7 +66,7 @@ class Crank : public Polygon {
     }
 
     float getRadius() {
-        return r/3.0;
+        return r;
     }
 
 };

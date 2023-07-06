@@ -3,13 +3,15 @@
 
 #include "ConnectingRod.h"
 #include "Crank.h"
-#include "Polygon.h"
 #include "Piston.h"
+#include "Polygon.h"
 #include "math_utils.h"
 
 
-#define CONNECTING_ROD_LEN 235
+#include <list>
+
 #define SPEED_UP 0.25
+#define V_ANGLE 45
 
 /*
 ##### Motor #####
@@ -20,8 +22,9 @@ Implementa o motor
 class Engine {
     float speed;
     Crank *crank;
-    ConnectingRod *connectingRod;
-    Piston* piston;
+    ConnectingRod *rightConnectingRod;
+    Piston *rightPiston;
+    list<Vector3> list;
 
   public:
     Engine(float speed, float x, float y, float z) {
@@ -29,31 +32,43 @@ class Engine {
         this->crank = new Crank(100, x, y, z);
 
         Vector3 connectionPin = crank->getConnectionPoint();
-        this->connectingRod = new ConnectingRod(
-            CONNECTING_ROD_LEN, connectionPin);
 
-        this->piston = new Piston(connectingRod->getPistonPin());
+        // incia o pistão direito
+        this->rightConnectingRod =
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE);
+
+        this->rightPiston = new Piston(rightConnectingRod->getPistonPin(), -V_ANGLE);
     }
 
     void render() {
         crank->render();
-        connectingRod->render();
-        piston->render();
+        rightConnectingRod->render();
+        rightPiston->render();
+
+        /*if (list.size() > 2000)
+            list.pop_front();
+
+        list.push_back(rightConnectingRod->getPistonPin());
+        //list.push_back(rightConnectingRod->getPosition());
+
+        CV::translate(0, 0);
+        CV::color(0);
+        for (auto it = list.begin(); it != list.end(); ++it) {
+            CV::color(0, 0, 255);
+            CV::point(it->x, it->y);
+        }*/
     }
 
     void update() {
         crank->rotate(speed);
-        connectingRod->update(crank->getConnectionPoint(), crank->getCenter());
-        piston->update(connectingRod->getPistonPin());
+        rightConnectingRod->update(crank->getConnectionPoint(),
+        crank->getCenter()); 
+        rightPiston->update(rightConnectingRod->getPistonPin());
     }
 
-    void speedUP() {
-        speed += SPEED_UP;
-    }
+    void speedUP() { speed += SPEED_UP; }
 
-    void speedDOWN() {
-        speed -= SPEED_UP;
-    }
+    void speedDOWN() { speed -= SPEED_UP; }
 };
 
 #endif // ENGINE_H_INCLUDED
