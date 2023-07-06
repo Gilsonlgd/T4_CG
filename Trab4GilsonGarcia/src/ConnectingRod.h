@@ -13,8 +13,8 @@ Implementa a biela
 #define BASE_WIDTH 80
 #define BASE_HEIGHT 80
 
-#define CONNECTION_INITIAL_WIDTH 40
-#define CONNECTION_FINAL_WIDTH 15
+#define CONNECTION_INITIAL_WIDTH 45
+#define CONNECTION_FINAL_WIDTH 18
 
 #define CONNECTING_ROD_LEN 235
 
@@ -30,9 +30,9 @@ class ConnectingRod : public Polygon {
 
     void initiateCoordinates() {
         vertices[0] =
-            Vector3(pistonPin.x - CONNECTION_FINAL_WIDTH / 2, pistonPin.y, 1);
+            Vector3(pistonPin.x - CONNECTION_FINAL_WIDTH / 2, pistonPin.y + 15, 1);
         vertices[1] =
-            Vector3(pistonPin.x + CONNECTION_FINAL_WIDTH / 2, pistonPin.y, 1);
+            Vector3(pistonPin.x + CONNECTION_FINAL_WIDTH / 2, pistonPin.y + 15, 1);
         vertices[2] = Vector3(pistonPin.x + CONNECTION_INITIAL_WIDTH / 2,
                               pistonPin.y - len + BASE_HEIGHT / 2, 1);
         vertices[3] = Vector3(pistonPin.x + BASE_WIDTH / 2,

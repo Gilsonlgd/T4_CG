@@ -29,6 +29,7 @@ class Piston : public Polygon {
         CV::color(0);
 
         CV::polygon(getXVertices(), getYVertices(), nPoints);
+        CV::circle(connectionRodPin.x, connectionRodPin.y, 6, 25);
     }
 
     void update(Vector3 newConnectionPin) {

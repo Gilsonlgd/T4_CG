@@ -22,8 +22,13 @@ Implementa o motor
 class Engine {
     float speed;
     Crank *crank;
+
     ConnectingRod *rightConnectingRod;
     Piston *rightPiston;
+
+    ConnectingRod *leftConnectingRod;
+    Piston *leftPiston;
+
     list<Vector3> list;
 
   public:
@@ -38,32 +43,34 @@ class Engine {
             new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE);
 
         this->rightPiston = new Piston(rightConnectingRod->getPistonPin(), -V_ANGLE);
+
+        // incia o pistão esquerdo
+        this->leftConnectingRod =
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE);
+
+        this->leftPiston = new Piston(leftConnectingRod->getPistonPin(), V_ANGLE);
     }
 
     void render() {
         crank->render();
+
         rightConnectingRod->render();
         rightPiston->render();
 
-        /*if (list.size() > 2000)
-            list.pop_front();
-
-        list.push_back(rightConnectingRod->getPistonPin());
-        //list.push_back(rightConnectingRod->getPosition());
-
-        CV::translate(0, 0);
-        CV::color(0);
-        for (auto it = list.begin(); it != list.end(); ++it) {
-            CV::color(0, 0, 255);
-            CV::point(it->x, it->y);
-        }*/
+        leftConnectingRod->render();
+        leftPiston->render();
     }
 
     void update() {
         crank->rotate(speed);
+
         rightConnectingRod->update(crank->getConnectionPoint(),
         crank->getCenter()); 
         rightPiston->update(rightConnectingRod->getPistonPin());
+
+        leftConnectingRod->update(crank->getConnectionPoint(),
+        crank->getCenter());
+        leftPiston->update(leftConnectingRod->getPistonPin());
     }
 
     void speedUP() { speed += SPEED_UP; }
