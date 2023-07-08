@@ -12,6 +12,7 @@
 
 #define SPEED_UP 0.25
 #define V_ANGLE 45
+#define CAM_DISTANCE 800
 
 /*
 ##### Motor #####
@@ -52,7 +53,7 @@ class Engine {
     }
 
     void render() {
-        crank->render();
+        crank->render(CAM_DISTANCE);
 
         rightConnectingRod->render();
         rightPiston->render();
@@ -62,7 +63,7 @@ class Engine {
     }
 
     void update() {
-        crank->rotate(speed);
+        crank->update(speed);
 
         rightConnectingRod->update(crank->getConnectionPoint(),
         crank->getCenter()); 
@@ -71,6 +72,10 @@ class Engine {
         leftConnectingRod->update(crank->getConnectionPoint(),
         crank->getCenter());
         leftPiston->update(leftConnectingRod->getPistonPin());
+    }
+
+    void rotateY(float angle) {
+        crank->rotateY(angle);
     }
 
     void speedUP() { speed -= SPEED_UP; }

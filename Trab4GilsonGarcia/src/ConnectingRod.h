@@ -52,7 +52,8 @@ class ConnectingRod : public Polygon {
         : Polygon(8) {
         this->len = CONNECTING_ROD_LEN;
         this->v_angle = v_angle;
-
+        this->angle = 0;
+        
         this->crankPin = crankPosition + Vector3(0, crankR, 0);
         this->crankPosition = crankPosition;
 

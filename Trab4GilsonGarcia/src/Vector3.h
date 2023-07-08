@@ -5,7 +5,6 @@
 #include <cmath>
 #include <stdio.h>
 
-
 class Vector3 {
   public:
     float x, y, z;
@@ -54,6 +53,14 @@ class Vector3 {
     }
 
     Vector2 ignoreZCoordinate() { return Vector2(x, y); }
+
+    Vector2 to2D(float d) {
+        Vector2 v2;
+        v2.x = x * d / z;
+        v2.y = y * d / z;
+
+        return v2;
+    }
 
     // Adicionem os demais overloads de operadores aqui.
 };

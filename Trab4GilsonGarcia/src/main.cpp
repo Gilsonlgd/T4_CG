@@ -96,6 +96,12 @@ void keyboard(int key) {
         case DOWN:
             engine->speedDOWN();
         break;
+        case LEFT:
+            engine->rotateY(1.5);
+        break;
+        case RIGHT:
+            engine->rotateY(-1.5);
+        break;
     }
     
 }
@@ -119,7 +125,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y) {
 }
 
 int main(void) {
-    engine = new Engine(0, 500, 200, 1);
+    engine = new Engine(0, 500, 200, 100);
 
 
     CV::init(&screenWidth, &screenHeight, "");

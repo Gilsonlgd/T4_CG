@@ -30,7 +30,14 @@ Algumas constantes interessantes
 #define CONTRAST_BOUND_COLOR 135, 206, 250
 
 // Teclado
+#define DEL 127
+#define CTRL 214
+#define SHIFT 212
+#define ESC 27
 #define UP 201
 #define DOWN 203
+#define LEFT 200
+#define RIGHT 202
+#define SPACE 32
 
 #endif // CONSTANTS_H_INCLUDED
