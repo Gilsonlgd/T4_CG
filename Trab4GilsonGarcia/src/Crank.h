@@ -82,7 +82,7 @@ class Crank : public Polygon {
         this->vertices[7] = Vector3(x - center_radius / 3.0, y + center_radius, z + CRANK_THICKNESS/2.0);
 
         rotatePoints(vertices.data(), nPoints, position.x, position.y, 90);
-        this->connectionPin = Vector3(x, y + center_radius, 0);
+        this->connectionPin = Vector3(x, y + center_radius, z);
     }
 
     void render(float d) {
