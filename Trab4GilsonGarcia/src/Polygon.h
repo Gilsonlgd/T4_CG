@@ -133,8 +133,6 @@ class Polygon {
         }
     }
 
-    virtual ~Polygon() {}
-
     virtual void render(float d) {
         CV::translate(0, 0);
         if (colorScale == RGBA)

@@ -72,7 +72,7 @@
 	"constants.h"
 	<cmath>
 
-1688782276 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\polygon.h
+1688783042 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\polygon.h
 	"Vector3.h"
 	"constants.h"
 	"gl_canvas2d.h"
@@ -94,7 +94,7 @@
 	"math_utils.h"
 	<list>
 
-1688782429 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\connectingrod.h
+1688784547 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\connectingrod.h
 	"Polygon.h"
 	<string>
 

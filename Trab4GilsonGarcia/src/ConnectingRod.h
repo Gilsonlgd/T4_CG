@@ -98,7 +98,7 @@ class ConnectingRod : public Polygon {
         Vector3 BC = newCrankPin - pistonPin;
 
         float crankR = AB.length();
-        float angle = angleDEG(AB, BC);
+        float ang = angleDEG(AB, BC);
         float lastPistonPinX = pistonPin.x;
         float lastPistonPinY = pistonPin.y;
 
@@ -106,7 +106,7 @@ class ConnectingRod : public Polygon {
         float inclineAngle = -v_angle * PI / 180.0;
 
         // Calcula a nova posição do pistão
-        float AC_Length = calculateTriangleSegmentB(crankR, len, angle);
+        float AC_Length = calculateTriangleSegmentB(crankR, len, ang);
         pistonPin.x = A.x + AC_Length * sin(inclineAngle);
         pistonPin.y = A.y + AC_Length * cos(inclineAngle);
 
