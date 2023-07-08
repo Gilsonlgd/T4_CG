@@ -87,5 +87,7 @@ Vector3 rotatePointAroundZAxis(Vector3 p, double angle, Vector3 pivot);
 
 Vector3 translate3DPoint(Vector3 p, float dx, float dy, float dz);
 
+void translateProjection(Vector2 *p, int n, float dx, float dy);
+
 
 #endif // MATH_UTILS_H

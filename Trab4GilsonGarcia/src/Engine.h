@@ -55,10 +55,10 @@ class Engine {
     void render() {
         crank->render(CAM_DISTANCE);
 
-        rightConnectingRod->render();
+        rightConnectingRod->render(CAM_DISTANCE);
         rightPiston->render();
 
-        leftConnectingRod->render();
+        leftConnectingRod->render(CAM_DISTANCE);
         leftPiston->render();
     }
 
@@ -76,6 +76,8 @@ class Engine {
 
     void rotateY(float angle) {
         crank->rotateY(angle);
+        rightConnectingRod->rotateY(angle);
+        leftConnectingRod->rotateY(angle);
     }
 
     void speedUP() { speed -= SPEED_UP; }

@@ -24,12 +24,16 @@ class Polygon {
     int nPoints;
     vector<Vector3> vertices;
     float angle;
+    float angleY;
+    float angleX;
 
     float offsetX, offsetY;
 
     float r, g, b;
     int indexColor;
     int colorScale;
+
+    
 
     // translada de acordo com um valor
     virtual void translateBy(float xIncrease, float yIncrease,
@@ -72,6 +76,45 @@ class Polygon {
         return yVertices;
     }
 
+    Vector2* calculateProjection(float d, Vector3 pivot) {
+        Vector2* projection = new Vector2[nPoints];
+        
+        translateBy(-pivot.x, -pivot.y, -pivot.z);
+
+        for (int i = 0; i < nPoints; i++) {
+            Vector3 point = vertices[i];
+            point = rotatePointAroundYAxis(point, angleY);
+            point = translate3DPoint(point, 0, 0, d);
+            projection[i] = point.to2D(d);
+        }
+
+        translateBy(pivot.x, pivot.y, pivot.z);
+        translateProjection(projection, nPoints, pivot.x, pivot.y);
+        
+        return projection;
+    }
+
+    void drawProjection(Vector2 *p) {
+        int secCount = (nPoints / 2) + 1;
+        int n = nPoints / 2;
+        
+        for (int i = 1; i < n; i++) {
+            //frente
+            CV::line(p[i - 1].x, p[i - 1].y, p[i].x, p[i].y);
+            // fundo
+            CV::line(p[secCount - 1].x, p[secCount - 1].y, p[secCount].x,
+                     p[secCount].y);
+            secCount++;
+        }
+        CV::line(p[n-1].x, p[n-1].y, p[0].x, p[0].y);
+        CV::line(p[nPoints-1].x, p[nPoints-1].y, p[n].x, p[n].y);
+
+        // arestas faltantes
+        for (int i = 0; i < n; i++) {
+            CV::line(p[i].x, p[i].y, p[i + n].x, p[i + n].y);
+        }
+    }
+
   public:
     Polygon(int nPoints) {
         r = 1;
@@ -79,6 +122,9 @@ class Polygon {
         b = 0;
         indexColor = 2;
         angle = 0;
+        angleY = 0;
+        angleX = 0;
+
         colorScale = INDEX14;
 
         this->nPoints = nPoints;

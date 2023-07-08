@@ -17,6 +17,13 @@ Implementa a biela
 #define CONNECTION_FINAL_WIDTH 18
 
 #define CONNECTING_ROD_LEN 235
+#define CONNECTING_ROD_THICKNESS 15.0
+
+/*
+##### Biela #####
+Implementa a biela
+##################
+*/
 
 class ConnectingRod : public Polygon {
     Vector3 pistonPin;
@@ -29,27 +36,33 @@ class ConnectingRod : public Polygon {
     float v_angle;
 
     void initiateCoordinates() {
+        float z = pistonPin.z;
+
         vertices[0] =
-            Vector3(pistonPin.x - CONNECTION_FINAL_WIDTH / 2, pistonPin.y + 15, 1);
+            Vector3(pistonPin.x - CONNECTION_FINAL_WIDTH / 2, pistonPin.y + 15, z - CONNECTING_ROD_THICKNESS / 2.0);
         vertices[1] =
-            Vector3(pistonPin.x + CONNECTION_FINAL_WIDTH / 2, pistonPin.y + 15, 1);
+            Vector3(pistonPin.x + CONNECTION_FINAL_WIDTH / 2, pistonPin.y + 15, z - CONNECTING_ROD_THICKNESS / 2.0);
         vertices[2] = Vector3(pistonPin.x + CONNECTION_INITIAL_WIDTH / 2,
-                              pistonPin.y - len + BASE_HEIGHT / 2, 1);
+                              pistonPin.y - len + BASE_HEIGHT / 2, z - CONNECTING_ROD_THICKNESS / 2.0);
         vertices[3] = Vector3(pistonPin.x + BASE_WIDTH / 2,
-                              pistonPin.y - len + BASE_HEIGHT / 2, 1);
+                              pistonPin.y - len + BASE_HEIGHT / 2, z - CONNECTING_ROD_THICKNESS / 2.0);
         vertices[4] = Vector3(pistonPin.x + BASE_WIDTH / 2,
-                              pistonPin.y - len - BASE_HEIGHT / 2, 1);
+                              pistonPin.y - len - BASE_HEIGHT / 2, z - CONNECTING_ROD_THICKNESS / 2.0);
         vertices[5] = Vector3(pistonPin.x - BASE_WIDTH / 2,
-                              pistonPin.y - len - BASE_HEIGHT / 2, 1);
+                              pistonPin.y - len - BASE_HEIGHT / 2, z - CONNECTING_ROD_THICKNESS / 2.0);
         vertices[6] = Vector3(pistonPin.x - BASE_WIDTH / 2,
-                              pistonPin.y - len + BASE_HEIGHT / 2, 1);
+                              pistonPin.y - len + BASE_HEIGHT / 2, z - CONNECTING_ROD_THICKNESS / 2.0);
         vertices[7] = Vector3(pistonPin.x - CONNECTION_INITIAL_WIDTH / 2,
-                              pistonPin.y - len + BASE_HEIGHT / 2, 1);
+                              pistonPin.y - len + BASE_HEIGHT / 2, z - CONNECTING_ROD_THICKNESS / 2.0);
+        
+        for (int i = 0; i < 8; i++) {
+            this->vertices[i + 8] = Vector3(this->vertices[i].x, this->vertices[i].y, z + CONNECTING_ROD_THICKNESS / 2.0);
+        }
     }
 
   public:
     ConnectingRod(Vector3 crankPosition, float crankR, float v_angle)
-        : Polygon(8) {
+        : Polygon(16) {
         this->len = CONNECTING_ROD_LEN;
         this->v_angle = v_angle;
         this->angle = 0;
@@ -70,11 +83,12 @@ class ConnectingRod : public Polygon {
                     crankPin.y, v_angle);
     }
 
-    void render() {
+    void render(float d) {
         CV::translate(0, 0);
         CV::color(0);
 
-        CV::polygon(getXVertices(), getYVertices(), nPoints);
+        Vector2* projection = calculateProjection(d, crankPosition);
+        drawProjection(projection);
     }
 
     void update(Vector3 newCrankPin, Vector3 crankPosition) {
@@ -123,6 +137,10 @@ class ConnectingRod : public Polygon {
 
     void rotate(float angle, float cx, float cy) {
         rotatePoints(vertices.data(), nPoints, cx, cy, angle);
+    }
+
+    void rotateY(float angle) {
+        angleY += angle;
     }
 
     Vector3 getPosition() {

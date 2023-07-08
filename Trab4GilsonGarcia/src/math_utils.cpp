@@ -384,3 +384,10 @@ float calculateTriangleSegmentC(float a, float b, float angle) {
     // Lei dos cossenos
     return sqrt(pow(a, 2) + pow(b, 2) - 2 * a * b * cos(angleRad));
 }
+
+void translateProjection(Vector2 *p, int n, float dx, float dy) {
+    for (int i = 0; i < n; i++) {
+        p[i].x += dx;
+        p[i].y += dy;
+    }
+}
