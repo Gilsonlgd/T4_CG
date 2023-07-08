@@ -17,7 +17,7 @@ Implementa a biela
 #define CONNECTION_FINAL_WIDTH 18
 
 #define CONNECTING_ROD_LEN 235
-#define CONNECTING_ROD_THICKNESS 15.0
+#define CONNECTING_ROD_THICKNESS 20.0
 
 /*
 ##### Biela #####
@@ -137,10 +137,6 @@ class ConnectingRod : public Polygon {
 
     void rotate(float angle, float cx, float cy) {
         rotatePoints(vertices.data(), nPoints, cx, cy, angle);
-    }
-
-    void rotateY(float angle) {
-        angleY += angle;
     }
 
     Vector3 getPosition() {

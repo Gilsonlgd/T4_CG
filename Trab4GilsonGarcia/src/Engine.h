@@ -43,23 +43,23 @@ class Engine {
         this->rightConnectingRod =
             new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE);
 
-        this->rightPiston = new Piston(rightConnectingRod->getPistonPin(), -V_ANGLE);
+        this->rightPiston = new Piston(rightConnectingRod->getPistonPin(),crank->getCenter(), -V_ANGLE);
 
         // incia o pistão esquerdo
         this->leftConnectingRod =
             new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE);
 
-        this->leftPiston = new Piston(leftConnectingRod->getPistonPin(), V_ANGLE);
+        this->leftPiston = new Piston(leftConnectingRod->getPistonPin(),crank->getCenter(), V_ANGLE);
     }
 
     void render() {
         crank->render(CAM_DISTANCE);
 
         rightConnectingRod->render(CAM_DISTANCE);
-        rightPiston->render();
+        rightPiston->render(CAM_DISTANCE);
 
         leftConnectingRod->render(CAM_DISTANCE);
-        leftPiston->render();
+        leftPiston->render(CAM_DISTANCE);
     }
 
     void update() {
@@ -76,8 +76,12 @@ class Engine {
 
     void rotateY(float angle) {
         crank->rotateY(angle);
+
         rightConnectingRod->rotateY(angle);
+        rightPiston->rotateY(angle);
+
         leftConnectingRod->rotateY(angle);
+        leftPiston->rotateY(angle);
     }
 
     void speedUP() { speed -= SPEED_UP; }

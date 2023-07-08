@@ -4,7 +4,7 @@
 #include "Polygon.h"
 #include "math_utils.h"
 
-#define CRANK_THICKNESS 40
+#define CRANK_THICKNESS 60
 
 /*
 ##### Manivela #####
@@ -59,10 +59,6 @@ class Crank : public Polygon {
     void update(float angle) {
         rotatePoints(vertices.data(), nPoints, position.x, position.y, angle);
         rotatePoints(&connectionPin, 1, position.x, position.y, angle);
-    }
-
-    void rotateY(float angle) {
-        angleY += angle;
     }
 
     Vector3 getConnectionPoint() { return connectionPin; }

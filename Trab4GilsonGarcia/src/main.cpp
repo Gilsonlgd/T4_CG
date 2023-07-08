@@ -125,7 +125,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y) {
 }
 
 int main(void) {
-    engine = new Engine(0, 500, 200, 100);
+    engine = new Engine(0, 600, 250, 100);
 
 
     CV::init(&screenWidth, &screenHeight, "");

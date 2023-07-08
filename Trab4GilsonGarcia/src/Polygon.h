@@ -162,6 +162,14 @@ class Polygon {
         colorScale = INDEX14;
     }
 
+    void rotateY(float angle) {
+        angleY += angle;
+    }
+
+    void rotateX(float angle) {
+        angleX += angle;
+    }
+
     float getColorR() { return r; }
 
     float getColorG() { return g; }
