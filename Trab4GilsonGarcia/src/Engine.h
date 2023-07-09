@@ -99,6 +99,23 @@ class Engine {
         leftPistonRing->rotateY(angle);
     }
 
+    void toggleCrankVisibility() { crank->toggleVisible(); }
+
+    void toggleConnectingRodVisibility() {
+        rightConnectingRod->toggleVisible();
+        leftConnectingRod->toggleVisible();
+    }
+
+    void togglePistonVisibility() {
+        rightPiston->toggleVisible();
+        leftPiston->toggleVisible();
+    }
+
+    void togglePistonRingVisibility() {
+        rightPistonRing->toggleVisible();
+        leftPistonRing->toggleVisible();
+    }
+
     void speedUP() { speed -= SPEED_UP; }
 
     void speedDOWN() { speed += SPEED_UP; }

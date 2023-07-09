@@ -106,6 +106,8 @@ class ConnectingRod : public Polygon {
     }
 
     void render(float d) {
+        if (!visible) return;
+        
         CV::translate(0, 0);
         CV::color(0);
 

@@ -62,6 +62,19 @@ void keyboard(int key) {
         case RIGHT:
             engine->rotateY(-ROTATION_SPEED);
         break;
+        case Q_KEY:
+            engine->toggleConnectingRodVisibility();
+        break;
+        case W_KEY:
+            engine->togglePistonRingVisibility();
+        break;
+        case E_KEY:
+            engine->togglePistonVisibility();
+        break;
+        case R_KEY:
+            engine->toggleCrankVisibility();
+        break;
+        
     }
     
 }

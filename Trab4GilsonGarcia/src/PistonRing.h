@@ -37,6 +37,8 @@ class PistonRing {
     float angleY;
     float angleX;
 
+    bool visible;
+
     vector<Vector3> points;
 
     virtual void translateBy(float xIncrease, float yIncrease, float zIncrease) {
@@ -97,9 +99,12 @@ class PistonRing {
 
         this->angleY = 0;
         this->angleX = 0;
+        this->visible = true;
     }
 
     void render(float d) {
+        if (!visible) return;
+
         CV::translate(0, 0);
         CV::color(11);
 
@@ -117,6 +122,14 @@ class PistonRing {
 
     void rotateX(float angle) {
         angleX += angle;
+    }
+
+    void setVisible(bool visible) {
+        this->visible = visible;
+    }
+
+    void toggleVisible() {
+        this->visible = !this->visible;
     }
 };
 

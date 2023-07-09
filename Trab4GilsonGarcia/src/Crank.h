@@ -46,6 +46,8 @@ class Crank : public Polygon {
     }
 
     void render(float d) {
+        if (!visible) return;
+        
         CV::translate(0, 0);
         if (colorScale == RGBA)
             CV::color(r, g, b);

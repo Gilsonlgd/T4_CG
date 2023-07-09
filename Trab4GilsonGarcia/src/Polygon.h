@@ -33,6 +33,8 @@ class Polygon {
     int indexColor;
     int colorScale;
 
+    bool visible;
+
     
 
     // translada de acordo com um valor
@@ -131,9 +133,13 @@ class Polygon {
         for (int i = 0; i < nPoints; i++) {
             vertices.push_back(Vector3(0, 0, 0));
         }
+
+        visible = true;
     }
 
     virtual void render(float d) {
+        if (!visible) return;
+
         CV::translate(0, 0);
         if (colorScale == RGBA)
             CV::color(r, g, b);
@@ -168,6 +174,14 @@ class Polygon {
 
     void rotateX(float angle) {
         angleX += angle;
+    }
+
+    void setVisible(bool visible) {
+        this->visible = visible;
+    }
+
+    void toggleVisible() {
+        visible = !visible;
     }
 
     float getColorR() { return r; }

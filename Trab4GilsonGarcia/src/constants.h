@@ -39,5 +39,14 @@ Algumas constantes interessantes
 #define LEFT 200
 #define RIGHT 202
 #define SPACE 32
+#define V_KEY 118
+#define B_KEY 98
+#define C_KEY 99
+#define P_KEY 112
+#define Q_KEY 113
+#define W_KEY 119
+#define E_KEY 101
+#define R_KEY 114
+
 
 #endif // CONSTANTS_H_INCLUDED
