@@ -22,19 +22,7 @@ conhecimentos de OpenGL para usar.
 
 using namespace std;
 
-#define X_AXIS_LEN 400
-#define Y_AXIS_LEN 400
-
-Vector3 entrada[8];
-
-float x = 100;
-float y = 100;
-float z = 50;
-float d = 131;
-
-float width = 100;
-float height = 100;
-float deth = 100;
+#define ROTATION_SPEED 2.5
 
 // variavel global para selecao do que sera exibido na canvas.
 int opcao = 50;
@@ -43,41 +31,13 @@ int screenWidth = 1200,
                         // redimensionamento de tela.
 int mouseX,
     mouseY; // variaveis globais do mouse para poder exibir dentro da render().
-bool alreadyTransformed = false;
+
 
 Engine* engine;
 
-// copia uma array para o outro
-void arrcopy(float *origin, float *dest, int tam) {
-    for (int i = 0; i < tam; i++) {
-        dest[i] = origin[i];
-    }
-}
-
-void drawCube(Vector2 cube[8]) {
-    int secCount = 5;
-    for (int i = 1; i < 4; i++) {
-        // quadrado da frente
-        CV::line(cube[i - 1].x, cube[i - 1].y, cube[i].x, cube[i].y);
-        // quadrado do fundo
-        CV::line(cube[secCount - 1].x, cube[secCount - 1].y, cube[secCount].x,
-                 cube[secCount].y);
-        secCount++;
-    }
-    CV::line(cube[3].x, cube[3].y, cube[0].x, cube[0].y);
-    CV::line(cube[7].x, cube[7].y, cube[4].x, cube[4].y);
-
-    // arestas faltantes
-    for (int i = 0; i < 4; i++) {
-        CV::line(cube[i].x, cube[i].y, cube[i + 4].x, cube[i + 4].y);
-    }
-}
-
 // funcao chamada continuamente. Deve-se controlar o que desenhar por meio de
 // variaveis globais Todos os comandos para desenho na canvas devem ser chamados
-// dentro da render(). Deve-se manter essa fun��o com poucas linhas de codigo.
-float angle = 0.0;
-
+// dentro da render(). Deve-se manter essa funcao com poucas linhas de codigo.
 void render() {
     engine->render();
     engine->update();
@@ -97,10 +57,10 @@ void keyboard(int key) {
             engine->speedDOWN();
         break;
         case LEFT:
-            engine->rotateY(1.5);
+            engine->rotateY(ROTATION_SPEED);
         break;
         case RIGHT:
-            engine->rotateY(-1.5);
+            engine->rotateY(-ROTATION_SPEED);
         break;
     }
     

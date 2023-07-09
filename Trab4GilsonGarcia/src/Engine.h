@@ -12,6 +12,7 @@
 
 #define SPEED_UP 0.25
 #define V_ANGLE 45
+#define CONNECTIONS_DISTANCE 28
 #define CAM_DISTANCE 800
 
 /*
@@ -41,13 +42,13 @@ class Engine {
 
         // incia o pistão direito
         this->rightConnectingRod =
-            new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE);
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE, -CONNECTIONS_DISTANCE/2.0);
 
         this->rightPiston = new Piston(rightConnectingRod->getPistonPin(),crank->getCenter(), -V_ANGLE);
 
         // incia o pistão esquerdo
         this->leftConnectingRod =
-            new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE);
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE, CONNECTIONS_DISTANCE/2.0);
 
         this->leftPiston = new Piston(leftConnectingRod->getPistonPin(),crank->getCenter(), V_ANGLE);
     }

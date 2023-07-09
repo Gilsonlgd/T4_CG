@@ -83,6 +83,28 @@ class ConnectingRod : public Polygon {
                     crankPin.y, v_angle);
     }
 
+    ConnectingRod(Vector3 crankPosition, float crankR, float v_angle, float z_connection)
+        : Polygon(16) {
+        this->len = CONNECTING_ROD_LEN;
+        this->v_angle = v_angle;
+        this->angle = 0;
+        
+        this->crankPin = crankPosition + Vector3(0, crankR, z_connection);
+        this->crankPosition = crankPosition;
+
+        this->pistonPin = Vector3(crankPin.x, crankPin.y + len, crankPin.z);
+        this->initialPistonPin = pistonPin;
+
+        initiateCoordinates();
+
+        rotate(v_angle, crankPin.x, crankPin.y);
+
+        rotatePoint(pistonPin.x, pistonPin.y, crankPin.x, crankPin.y, v_angle);
+
+        rotatePoint(initialPistonPin.x, initialPistonPin.y, crankPin.x,
+                    crankPin.y, v_angle);
+    }
+
     void render(float d) {
         CV::translate(0, 0);
         CV::color(0);
