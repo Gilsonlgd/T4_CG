@@ -44,15 +44,12 @@
 			<Add library="../lib/freeglut.lib" />
 		</Linker>
 		<Unit filename="include/GL/glut.h" />
-		<Unit filename="src/Botao.h" />
-		<Unit filename="src/Circle.h" />
 		<Unit filename="src/ConnectingRod.h" />
 		<Unit filename="src/Crank.h" />
 		<Unit filename="src/Engine.h" />
 		<Unit filename="src/Piston.h" />
 		<Unit filename="src/PistonRing.h" />
 		<Unit filename="src/Polygon.h" />
-		<Unit filename="src/Rectangle.h" />
 		<Unit filename="src/Vector2.h" />
 		<Unit filename="src/Vector3.h" />
 		<Unit filename="src/constants.h" />

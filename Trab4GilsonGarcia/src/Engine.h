@@ -43,7 +43,7 @@ class Engine {
 
         Vector3 connectionPin = crank->getConnectionPoint();
 
-        // incia o pistão direito
+        // inicia o pistão direito
         this->rightConnectingRod =
             new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE, -CONNECTIONS_DISTANCE / 2.0);
 
