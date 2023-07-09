@@ -99,6 +99,18 @@ class Engine {
         leftPistonRing->rotateY(angle);
     }
 
+    void rotateX(float angle) {
+        crank->rotateX(angle);
+
+        rightConnectingRod->rotateX(angle);
+        rightPiston->rotateX(angle);
+        rightPistonRing->rotateX(angle);
+
+        leftConnectingRod->rotateX(angle);
+        leftPiston->rotateX(angle);
+        leftPistonRing->rotateX(angle);
+    }
+
     void toggleCrankVisibility() { crank->toggleVisible(); }
 
     void toggleConnectingRodVisibility() {

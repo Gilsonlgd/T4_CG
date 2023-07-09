@@ -47,6 +47,12 @@ Algumas constantes interessantes
 #define W_KEY 119
 #define E_KEY 101
 #define R_KEY 114
+#define S_KEY 115
+
+#define KEY_1 49
+#define KEY_2 50
+#define KEY_3 51
+#define KEY_4 52
 
 
 #endif // CONSTANTS_H_INCLUDED

@@ -51,10 +51,10 @@ void keyboard(int key) {
 
     switch (key) {
         case UP:
-            engine->speedUP();
+            engine->rotateX(ROTATION_SPEED);
         break;
         case DOWN:
-            engine->speedDOWN();
+            engine->rotateX(-ROTATION_SPEED);
         break;
         case LEFT:
             engine->rotateY(ROTATION_SPEED);
@@ -62,17 +62,23 @@ void keyboard(int key) {
         case RIGHT:
             engine->rotateY(-ROTATION_SPEED);
         break;
-        case Q_KEY:
+        case KEY_2:
             engine->toggleConnectingRodVisibility();
         break;
-        case W_KEY:
+        case KEY_4:
             engine->togglePistonRingVisibility();
         break;
-        case E_KEY:
+        case KEY_3:
             engine->togglePistonVisibility();
         break;
-        case R_KEY:
+        case KEY_1:
             engine->toggleCrankVisibility();
+        break;
+        case W_KEY:
+            engine->speedUP();
+        break;
+        case S_KEY:
+            engine->speedDOWN();
         break;
         
     }

@@ -15,7 +15,7 @@ using namespace std;
 /*
 ##### Polygon #####
 Implementa um polígono
-de n lados.
+de n vertices.
 ######################
 */
 
@@ -34,8 +34,6 @@ class Polygon {
     int colorScale;
 
     bool visible;
-
-    
 
     // translada de acordo com um valor
     virtual void translateBy(float xIncrease, float yIncrease,
@@ -86,6 +84,7 @@ class Polygon {
         for (int i = 0; i < nPoints; i++) {
             Vector3 point = vertices[i];
             point = rotatePointAroundYAxis(point, angleY);
+            point = rotatePointAroundXAxis(point, angleX);
             point = translate3DPoint(point, 0, 0, d);
             projection[i] = point.to2D(d);
         }

@@ -33,7 +33,7 @@
 	<cmath>
 	<stdio.h>
 
-1688935140 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\main.cpp
+1688936037 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<cmath>
@@ -61,7 +61,7 @@
 	<cmath>
 	<stdio.h>
 
-1688935128 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\constants.h
+1688935962 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\constants.h
 
 1688929156 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
@@ -72,7 +72,7 @@
 	"constants.h"
 	<cmath>
 
-1688934324 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\polygon.h
+1688935541 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\polygon.h
 	"Vector3.h"
 	"constants.h"
 	"gl_canvas2d.h"
@@ -86,7 +86,7 @@
 	"Polygon.h"
 	"math_utils.h"
 
-1688934631 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\engine.h
+1688935691 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\engine.h
 	"ConnectingRod.h"
 	"Crank.h"
 	"Piston.h"
@@ -103,7 +103,7 @@
 	"Polygon.h"
 	"math_utils.h"
 
-1688934337 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\pistonring.h
+1688936085 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\pistonring.h
 	"Vector2.h"
 	"Vector3.h"
 	"constants.h"
