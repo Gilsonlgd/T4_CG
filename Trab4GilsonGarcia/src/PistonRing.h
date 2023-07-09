@@ -12,7 +12,7 @@
 
 using namespace std;
 
-#define PRECISION 0.01
+#define PRECISION 0.02
 #define HEIGHT_INCREASE 10
 #define Y_OFFSET -50
 #define HEIGHT 175

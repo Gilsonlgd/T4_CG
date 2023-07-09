@@ -4,7 +4,7 @@
 #include "Polygon.h"
 #include "math_utils.h"
 
-#define CRANK_THICKNESS 60
+#define CRANK_THICKNESS 250
 
 /*
 ##### Manivela #####

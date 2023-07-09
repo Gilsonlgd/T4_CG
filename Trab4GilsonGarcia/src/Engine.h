@@ -14,6 +14,7 @@
 #define SPEED_UP 0.25
 #define V_ANGLE 45
 #define CONNECTIONS_DISTANCE 28
+#define CENTER_DISTANCE 80
 #define CAM_DISTANCE 1200
 
 /*
@@ -34,6 +35,14 @@ class Engine {
     Piston *leftPiston;
     PistonRing *leftPistonRing;
 
+    ConnectingRod *rightConnectingRod_2;
+    Piston *rightPiston_2;
+    PistonRing *rightPistonRing_2;
+
+    ConnectingRod *leftConnectingRod_2;
+    Piston *leftPiston_2;
+    PistonRing *leftPistonRing_2;
+
     list<Vector3> list;
 
     float v_angle;
@@ -48,22 +57,41 @@ class Engine {
 
         // inicia o pistão direito
         this->rightConnectingRod =
-            new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE, -CONNECTIONS_DISTANCE / 2.0);
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE, -CONNECTIONS_DISTANCE / 2.0 - CENTER_DISTANCE);
 
         this->rightPiston = new Piston(rightConnectingRod->getPistonPin(), crank->getCenter(), -V_ANGLE);
 
         // incia o pistão esquerdo
         this->leftConnectingRod =
-            new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE, CONNECTIONS_DISTANCE / 2.0);
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE, CONNECTIONS_DISTANCE / 2.0 - CENTER_DISTANCE);
 
         this->leftPiston = new Piston(leftConnectingRod->getPistonPin(),
+                                      crank->getCenter(), V_ANGLE);
+        
+        // outros dois
+        this->rightConnectingRod_2 =
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE, -CONNECTIONS_DISTANCE / 2.0 + CENTER_DISTANCE);
+
+        this->rightPiston_2 = new Piston(rightConnectingRod_2->getPistonPin(), crank->getCenter(), -V_ANGLE);
+
+        // inicia o pistão esquerdo
+        this->leftConnectingRod_2 =
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE, CONNECTIONS_DISTANCE / 2.0 + CENTER_DISTANCE);
+
+        this->leftPiston_2 = new Piston(leftConnectingRod_2->getPistonPin(),
                                       crank->getCenter(), V_ANGLE);
 
         this->update();
         this->rightPistonRing = new PistonRing(rightPiston->getConnectionPin(), crank->getCenter(), rightPiston->getWidth(),
                                                rightPiston->getThickness(), -V_ANGLE);
         this->leftPistonRing = new PistonRing(leftPiston->getConnectionPin(), crank->getCenter(), leftPiston->getWidth(),
-                                               leftPiston->getThickness(), V_ANGLE);                          
+                                               leftPiston->getThickness(), V_ANGLE);  
+
+        // outros dois
+        this->rightPistonRing_2 = new PistonRing(rightPiston_2->getConnectionPin(), crank->getCenter(), rightPiston_2->getWidth(),
+                                               rightPiston_2->getThickness(), -V_ANGLE);
+        this->leftPistonRing_2 = new PistonRing(leftPiston_2->getConnectionPin(), crank->getCenter(), leftPiston_2->getWidth(),
+                                               leftPiston_2->getThickness(), V_ANGLE);                                                         
     }
 
     void render() {
@@ -76,6 +104,14 @@ class Engine {
         leftConnectingRod->render(CAM_DISTANCE);
         leftPiston->render(CAM_DISTANCE);
         leftPistonRing->render(CAM_DISTANCE);
+
+        rightConnectingRod_2->render(CAM_DISTANCE);
+        rightPiston_2->render(CAM_DISTANCE);
+        rightPistonRing_2->render(CAM_DISTANCE);
+
+        leftConnectingRod_2->render(CAM_DISTANCE);
+        leftPiston_2->render(CAM_DISTANCE);
+        leftPistonRing_2->render(CAM_DISTANCE);
     }
 
     void update() {
@@ -88,6 +124,14 @@ class Engine {
         leftConnectingRod->update(crank->getConnectionPoint(),
                                   crank->getCenter());
         leftPiston->update(leftConnectingRod->getPistonPin());
+
+        rightConnectingRod_2->update(crank->getConnectionPoint(),
+                                   crank->getCenter());
+        rightPiston_2->update(rightConnectingRod_2->getPistonPin());
+
+        leftConnectingRod_2->update(crank->getConnectionPoint(),
+                                  crank->getCenter());
+        leftPiston_2->update(leftConnectingRod_2->getPistonPin());
     }
 
     void rotateY(float angle) {
@@ -100,6 +144,14 @@ class Engine {
         leftConnectingRod->rotateY(angle);
         leftPiston->rotateY(angle);
         leftPistonRing->rotateY(angle);
+
+        rightConnectingRod_2->rotateY(angle);
+        rightPiston_2->rotateY(angle);
+        rightPistonRing_2->rotateY(angle);
+
+        leftConnectingRod_2->rotateY(angle);
+        leftPiston_2->rotateY(angle);
+        leftPistonRing_2->rotateY(angle);
     }
 
     void rotateX(float angle) {
@@ -112,6 +164,14 @@ class Engine {
         leftConnectingRod->rotateX(angle);
         leftPiston->rotateX(angle);
         leftPistonRing->rotateX(angle);
+
+        rightConnectingRod_2->rotateX(angle);
+        rightPiston_2->rotateX(angle);
+        rightPistonRing_2->rotateX(angle);
+
+        leftConnectingRod_2->rotateX(angle);
+        leftPiston_2->rotateX(angle);
+        leftPistonRing_2->rotateX(angle);
     }
 
     void toggleCrankVisibility() { crank->toggleVisible(); }
@@ -119,16 +179,25 @@ class Engine {
     void toggleConnectingRodVisibility() {
         rightConnectingRod->toggleVisible();
         leftConnectingRod->toggleVisible();
+
+        /*rightConnectingRod_2->toggleVisible();
+        leftConnectingRod_2->toggleVisible();*/
     }
 
     void togglePistonVisibility() {
         rightPiston->toggleVisible();
         leftPiston->toggleVisible();
+
+        /*rightPiston_2->toggleVisible();
+        leftPiston_2->toggleVisible();*/
     }
 
     void togglePistonRingVisibility() {
         rightPistonRing->toggleVisible();
         leftPistonRing->toggleVisible();
+
+        /*rightPistonRing_2->toggleVisible();
+        leftPistonRing_2->toggleVisible();*/
     }
 
     void speedUP() { speed -= SPEED_UP; }
@@ -146,6 +215,14 @@ class Engine {
         leftConnectingRod->setV_angle(v_angle);
         leftPiston->setV_angle(v_angle);
         leftPistonRing->setV_angle(v_angle);
+
+        rightConnectingRod_2->setV_angle(-v_angle);
+        rightPiston_2->setV_angle(-v_angle);
+        rightPistonRing_2->setV_angle(-v_angle);
+
+        leftConnectingRod_2->setV_angle(v_angle);
+        leftPiston_2->setV_angle(v_angle);
+        leftPistonRing_2->setV_angle(v_angle);
     }
 
     void decreaseV_angle() {
@@ -159,6 +236,14 @@ class Engine {
         leftConnectingRod->setV_angle(v_angle);
         leftPiston->setV_angle(v_angle);
         leftPistonRing->setV_angle(v_angle);
+
+        rightConnectingRod_2->setV_angle(-v_angle);
+        rightPiston_2->setV_angle(-v_angle);
+        rightPistonRing_2->setV_angle(-v_angle);
+
+        leftConnectingRod_2->setV_angle(v_angle);
+        leftPiston_2->setV_angle(v_angle);
+        leftPistonRing_2->setV_angle(v_angle);
     }
 };
 
