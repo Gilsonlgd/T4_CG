@@ -4,9 +4,10 @@
 #include "ConnectingRod.h"
 #include "Crank.h"
 #include "Piston.h"
+#include "PistonRing.h"
+
 #include "Polygon.h"
 #include "math_utils.h"
-
 
 #include <list>
 
@@ -27,9 +28,11 @@ class Engine {
 
     ConnectingRod *rightConnectingRod;
     Piston *rightPiston;
+    PistonRing *rightPistonRing;
 
     ConnectingRod *leftConnectingRod;
     Piston *leftPiston;
+    PistonRing *leftPistonRing;
 
     list<Vector3> list;
 
@@ -42,15 +45,22 @@ class Engine {
 
         // incia o pistão direito
         this->rightConnectingRod =
-            new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE, -CONNECTIONS_DISTANCE/2.0);
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), -V_ANGLE, -CONNECTIONS_DISTANCE / 2.0);
 
-        this->rightPiston = new Piston(rightConnectingRod->getPistonPin(),crank->getCenter(), -V_ANGLE);
+        this->rightPiston = new Piston(rightConnectingRod->getPistonPin(), crank->getCenter(), -V_ANGLE);
 
         // incia o pistão esquerdo
         this->leftConnectingRod =
-            new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE, CONNECTIONS_DISTANCE/2.0);
+            new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE, CONNECTIONS_DISTANCE / 2.0);
 
-        this->leftPiston = new Piston(leftConnectingRod->getPistonPin(),crank->getCenter(), V_ANGLE);
+        this->leftPiston = new Piston(leftConnectingRod->getPistonPin(),
+                                      crank->getCenter(), V_ANGLE);
+
+        this->update();
+        this->rightPistonRing = new PistonRing(rightPiston->getConnectionPin(), crank->getCenter(), rightPiston->getWidth(),
+                                               rightPiston->getThickness(), -V_ANGLE);
+        this->leftPistonRing = new PistonRing(leftPiston->getConnectionPin(), crank->getCenter(), leftPiston->getWidth(),
+                                               leftPiston->getThickness(), V_ANGLE);                          
     }
 
     void render() {
@@ -58,20 +68,22 @@ class Engine {
 
         rightConnectingRod->render(CAM_DISTANCE);
         rightPiston->render(CAM_DISTANCE);
+        rightPistonRing->render(CAM_DISTANCE);
 
         leftConnectingRod->render(CAM_DISTANCE);
         leftPiston->render(CAM_DISTANCE);
+        leftPistonRing->render(CAM_DISTANCE);
     }
 
     void update() {
         crank->update(speed);
 
         rightConnectingRod->update(crank->getConnectionPoint(),
-        crank->getCenter()); 
+                                   crank->getCenter());
         rightPiston->update(rightConnectingRod->getPistonPin());
 
         leftConnectingRod->update(crank->getConnectionPoint(),
-        crank->getCenter());
+                                  crank->getCenter());
         leftPiston->update(leftConnectingRod->getPistonPin());
     }
 
@@ -80,9 +92,11 @@ class Engine {
 
         rightConnectingRod->rotateY(angle);
         rightPiston->rotateY(angle);
+        rightPistonRing->rotateY(angle);
 
         leftConnectingRod->rotateY(angle);
         leftPiston->rotateY(angle);
+        leftPistonRing->rotateY(angle);
     }
 
     void speedUP() { speed -= SPEED_UP; }

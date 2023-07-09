@@ -46,9 +46,6 @@ class Piston : public Polygon {
         CV::translate(0, 0);
         CV::color(4);
 
-        /*CV::polygon(getXVertices(), getYVertices(), nPoints);
-        CV::circle(connectionRodPin.x, connectionRodPin.y, 6, 25);*/
-
         Vector2* projection = calculateProjection(d, crankPosition);
         drawProjection(projection);
     }
@@ -62,6 +59,22 @@ class Piston : public Polygon {
 
     void rotate(float angle, float cx, float cy) {
         rotatePoints(vertices.data(), nPoints, cx, cy, angle);
+    }
+
+    float getHeight() {
+        return PISTON_HEIGHT;
+    }
+
+    float getWidth() {
+        return PISTON_WIDTH;
+    }
+
+    float getThickness() {
+        return PISTON_THICKNESS;
+    }
+
+    Vector3 getConnectionPin() {
+        return connectionRodPin;
     }
 };
 

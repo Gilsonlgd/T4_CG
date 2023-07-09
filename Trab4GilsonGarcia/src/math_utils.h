@@ -68,6 +68,8 @@ float calculateTriangleSegmentA(float b, float c, float angle);
 
 float calculateTriangleSegmentC(float a, float b, float angle);
 
+float calculateMinRadiusToFitCube(float width, float depth);
+
 // 3D
 float angleDEG(const Vector3 v1, const Vector3 v2);
 

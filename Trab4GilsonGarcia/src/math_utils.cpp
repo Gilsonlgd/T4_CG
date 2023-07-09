@@ -175,6 +175,12 @@ float evaluateBezier3(float p1, float p2, float p3, float p4, float t) {
            p3 * (3 * pow(t, 2) * (1 - t)) + p4 * pow(t, 3);
 }
 
+float calculateMinRadiusToFitCube(float width, float depth) {
+    float diagonal = std::sqrt(width * width + depth * depth);
+    float radius = diagonal / 2;
+    return radius;
+}
+
 Vector2 project3DPoint(Vector3 v, float d) {
     Vector2 v2;
     v2.x = v.x * d / (v.z);
