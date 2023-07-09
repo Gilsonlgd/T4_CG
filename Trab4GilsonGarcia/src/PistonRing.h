@@ -132,6 +132,13 @@ class PistonRing {
     void toggleVisible() {
         this->visible = !this->visible;
     }
+
+    void setV_angle(float v_angle) {        
+        float deltaAng = v_angle - this->v_angle;
+        this->v_angle = v_angle;
+
+        rotate(deltaAng, crankPosition.x, crankPosition.y);
+    }
 };
 
 #endif // PISTON_RING_H_INCLUDED

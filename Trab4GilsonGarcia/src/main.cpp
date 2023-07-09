@@ -80,7 +80,12 @@ void keyboard(int key) {
         case S_KEY:
             engine->speedDOWN();
         break;
-        
+        case J_KEY:
+            engine->increaseV_angle();
+        break;
+        case U_KEY:
+            engine->decreaseV_angle();
+        break;  
     }
     
 }

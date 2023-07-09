@@ -48,6 +48,8 @@ Algumas constantes interessantes
 #define E_KEY 101
 #define R_KEY 114
 #define S_KEY 115
+#define U_KEY 117
+#define J_KEY 106
 
 #define KEY_1 49
 #define KEY_2 50

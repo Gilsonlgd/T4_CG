@@ -175,6 +175,18 @@ class ConnectingRod : public Polygon {
     }
 
     Vector3 getPistonPin() { return pistonPin; }
+
+    void setV_angle(float v_angle) {        
+        float deltaAng = v_angle - this->v_angle;
+        this->v_angle = v_angle;
+
+        rotate(deltaAng, crankPin.x, crankPin.y);
+
+        rotatePoint(pistonPin.x, pistonPin.y, crankPin.x, crankPin.y, deltaAng);
+
+        rotatePoint(initialPistonPin.x, initialPistonPin.y, crankPin.x,
+                    crankPin.y, deltaAng);
+    }
 };
 
 #endif // CONNECTINGROD_H_INCLUDED

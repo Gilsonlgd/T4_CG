@@ -36,10 +36,13 @@ class Engine {
 
     list<Vector3> list;
 
+    float v_angle;
+
   public:
     Engine(float speed, float x, float y, float z) {
         this->speed = speed;
         this->crank = new Crank(100, x, y, z);
+        this->v_angle = V_ANGLE;
 
         Vector3 connectionPin = crank->getConnectionPoint();
 
@@ -131,6 +134,32 @@ class Engine {
     void speedUP() { speed -= SPEED_UP; }
 
     void speedDOWN() { speed += SPEED_UP; }
+
+    void increaseV_angle() {
+        if (v_angle > 55) return;
+        v_angle += 1;
+
+        rightConnectingRod->setV_angle(-v_angle);
+        rightPiston->setV_angle(-v_angle);
+        rightPistonRing->setV_angle(-v_angle);
+
+        leftConnectingRod->setV_angle(v_angle);
+        leftPiston->setV_angle(v_angle);
+        leftPistonRing->setV_angle(v_angle);
+    }
+
+    void decreaseV_angle() {
+        if (v_angle < 30) return;
+        v_angle -= 1;
+
+        rightConnectingRod->setV_angle(-v_angle);
+        rightPiston->setV_angle(-v_angle);
+        rightPistonRing->setV_angle(-v_angle);
+
+        leftConnectingRod->setV_angle(v_angle);
+        leftPiston->setV_angle(v_angle);
+        leftPistonRing->setV_angle(v_angle);
+    }
 };
 
 #endif // ENGINE_H_INCLUDED

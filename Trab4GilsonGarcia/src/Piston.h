@@ -18,6 +18,7 @@ Implementa o pistão
 class Piston : public Polygon {
     Vector3 connectionRodPin;
     Vector3 crankPosition;
+    float v_angle;
 
     void initiateCoordinates() {
         float z = connectionRodPin.z;
@@ -37,6 +38,7 @@ class Piston : public Polygon {
     Piston(Vector3 connectionRodPin, Vector3 crankPosition, float v_angle) : Polygon(8) {
         this->connectionRodPin = connectionRodPin;
         this->crankPosition = crankPosition;
+        this->v_angle = v_angle;
 
         initiateCoordinates();
         rotate(v_angle, connectionRodPin.x, connectionRodPin.y);
@@ -77,6 +79,14 @@ class Piston : public Polygon {
     Vector3 getConnectionPin() {
         return connectionRodPin;
     }
+
+    void setV_angle(float v_angle) {        
+        float deltaAng = v_angle - this->v_angle;
+        this->v_angle = v_angle;
+
+        rotate(deltaAng, connectionRodPin.x, connectionRodPin.y);
+    }
+;
 };
 
 #endif
