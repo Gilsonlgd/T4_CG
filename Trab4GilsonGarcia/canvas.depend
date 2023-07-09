@@ -33,7 +33,7 @@
 	<cmath>
 	<stdio.h>
 
-1688936037 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\main.cpp
+1688936110 source:c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<cmath>
@@ -72,7 +72,7 @@
 	"constants.h"
 	<cmath>
 
-1688935541 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\polygon.h
+1688939060 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\polygon.h
 	"Vector3.h"
 	"constants.h"
 	"gl_canvas2d.h"
@@ -103,7 +103,7 @@
 	"Polygon.h"
 	"math_utils.h"
 
-1688936085 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\pistonring.h
+1688939081 c:\users\pichau\desktop\trabalhos\cg-t4\trab4gilsongarcia\src\pistonring.h
 	"Vector2.h"
 	"Vector3.h"
 	"constants.h"

@@ -83,8 +83,8 @@ class Polygon {
 
         for (int i = 0; i < nPoints; i++) {
             Vector3 point = vertices[i];
-            point = rotatePointAroundYAxis(point, angleY);
             point = rotatePointAroundXAxis(point, angleX);
+            point = rotatePointAroundYAxis(point, angleY);
             point = translate3DPoint(point, 0, 0, d);
             projection[i] = point.to2D(d);
         }
