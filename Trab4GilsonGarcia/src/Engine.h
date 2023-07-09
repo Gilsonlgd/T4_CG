@@ -14,7 +14,7 @@
 #define SPEED_UP 0.25
 #define V_ANGLE 45
 #define CONNECTIONS_DISTANCE 28
-#define CAM_DISTANCE 800
+#define CAM_DISTANCE 1200
 
 /*
 ##### Motor #####

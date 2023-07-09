@@ -101,7 +101,7 @@ class PistonRing {
 
     void render(float d) {
         CV::translate(0, 0);
-        CV::color(5);
+        CV::color(11);
 
         Vector2 *projection = calculateProjection(d, crankPosition);
         drawProjection(projection);
