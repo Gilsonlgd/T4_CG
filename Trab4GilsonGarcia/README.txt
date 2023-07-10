@@ -1,47 +1,29 @@
 Trabalho de Gilson Garcia.
 
-Este é um editor de formas geométricas que permite criar imagens com retas, retângulos e círculos.
-Abre o arquivo figuras.gr sempre que inicializa o aplicativo.
+Este é um simulador 3d de um motor em V
+
+###### Funcionalidades: ######
+	Todos os requisitos mínimos foram implementados:
+	1. Rotação do eixo variável (RPM informada pelo usuário).
+	2. Visualização ortográfica e perspectiva (sob vários ângulos) em wireframe.
+
+	Requisitos Extra:
+	1. Adição de mais pistões ao virabrequim
+	2. Ajuste do ângulo entre os 2 pistões, entre 60 e 110 graus
+
+obs.: na versão 2d entregue não é possível alterar o ângulo entre os pistões.
 
 ###### Intruções: ######
-- Para criar uma figura:
-	- Na Toolbar clique no botão da figura de seu desejo e clique no local onde quer posicioná-la. Ela será iniciada com um tamanho padronizado.
+    	1. Para rotacionar o motor no eixo X utilize as teclas cima e baixo. 
+	2. Para rotacionar o motor no eixo Y utilize as teclas esquerda e direita.
+	3. Para alternar a visibilidade do virabrequim, utilize a tecla '1'.
+	4. Para alternar a visibilidade da biela, utilize a tecla '2'.
+	5. Para alternar a visibilidade do pistão, utilize a tecla '3'.
+	6. Para alternar a visibilidade da capa do pistão, utilize a tecla '4'.
+	7. Para aumentar a velocidade de rotação do eixo utilize a tecla 'W'.
+	8. Para diminuir a velocidade de rotação do eixo utilize a tecla 'S'.
+	9. Para aumentar o ângulo entre os pistões utilize a tecla 'J'.
+	10. Para diminuir o ângulo entre os pistões utilize a tecla 'U'.
 
-- Para selecionar figuras:
-	- Clique nela! (Isso também trará ela para a frente de todas as outras).
-	- Caso queria selecionar várias figuras, segure CTRL.
-	- Para des-selecionar figuras você pode: clicar em outra figura sem pressionar CTRL, clicar fora de uma figura ou apertar ESC. 
 
-- Para redimensionar figuras:
-Ao selecionar uma figura, botões redondos aparecem aos seu redor. Ao clicar e arrastar esses pontos é possível redimensionar as figuras.
-	- Nas linhas é possível mudar seu ponto inicial e final
-	- Nos retângulos é possível mudar a posição de suas arestas. Só é possível mudar na direção da das arestas perpendiculares à selecionada (para manter a forma).
-	- Nos círculos é possível aumentar o raio.
-
-Ao segurar SHIFT e arrastar um dos botões de redimensionamento, a figura é redimensionada proporcionalmente (no caso do círculo sempre é).
-	- Nas linhas, o ponto oposto ao que se está arrastando é movimentado na mesma proporção.
-	- Nos retângulos, a aresta perpendicular à selecionada é movimentada na mesma proporção. 
-	- Só é possível redimensionar uma figura por vez.
-
-- Para rotacionar figuras
-Ao selecionar uma figura figura, fora dela à sua direita há um botão como o de redimensionamento.
-	- Arraste esse botão e você rotacionará a figura.
-	- Só é possível rotacionar uma figura por vez.
-
-- Para arrastar figuras:
-	- Selecione e arraste!
-	- Caso queira arrastar várias, selecione várias e segurando CTRL arraste.
-
-- Para pintar figuras:
-	- Na toolbar selecione a cor desejada. Isso fará com que o ponteiro do mouse se torne um "pincel". Clicando em qualquer figura, ela terá a cor desejada.
-	- Você pode pintar várias! Selecione as figuras que quer pintar. Segurando CTRL selecione a cor, e clique em alguma das figuras selecionadas.
-	- Ao utilizar a ferramenta de "pincel" você não consegue arrastar, redimensionar ou rotacionar figuras. 
-	- Para voltar ao ponteiro do mouse normal você pode: selecionar para criar uma nova figura ou apertar ESC. 
-
-- Para excluir figuras:
-	- Selecione as figuras que quer apagar e aperte DEL (ou DELETE) dependendo do seu teclado.
-	- Na Toolbar você pode também clicar no botão "Excluir Tudo" para excluir todas as figuras criadas.
-
-- Para salvar o arquivo:
-	- Na Toolbar, clique no botão "Salvar Arquivo"
  
