@@ -60,6 +60,7 @@ class Polygon {
         return pl_project;
     }
 
+    // retorna um vetor com as coordenadas x dos vertices
     float* getXVertices() {
         float* xVertices = new float[nPoints];
         for (int i = 0; i < nPoints; i++) {
@@ -68,6 +69,7 @@ class Polygon {
         return xVertices;
     }
 
+    // retorna um vetor com as coordenadas y dos vertices
     float* getYVertices() {
         float* yVertices = new float[nPoints];
         for (int i = 0; i < nPoints; i++) {
@@ -76,6 +78,7 @@ class Polygon {
         return yVertices;
     }
 
+    
     Vector2* calculateProjection(float d, Vector3 pivot) {
         Vector2* projection = new Vector2[nPoints];
         

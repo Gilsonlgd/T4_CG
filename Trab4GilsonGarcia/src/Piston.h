@@ -72,6 +72,7 @@ class Piston : public Polygon {
         return PISTON_WIDTH;
     }
 
+    // retorna a profundidade do pistão
     float getThickness() {
         return PISTON_THICKNESS;
     }

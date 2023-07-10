@@ -9,12 +9,11 @@
 #include "Polygon.h"
 #include "math_utils.h"
 
-#include <list>
 
 #define SPEED_UP 0.25
-#define V_ANGLE 45
-#define CONNECTIONS_DISTANCE 28
-#define CENTER_DISTANCE 80
+#define V_ANGLE 45                // angulo inicial entre os pistões
+#define CONNECTIONS_DISTANCE 28   // distancia uma biela e outra
+#define CENTER_DISTANCE 80        // distancia entre os pares de bielas
 #define CAM_DISTANCE 1200
 
 /*
@@ -27,10 +26,10 @@ class Engine {
     float speed;
     Crank *crank;
 
-    ConnectingRod *rightConnectingRod;
-    Piston *rightPiston;
-    PistonRing *rightPistonRing;
-
+    ConnectingRod *rightConnectingRod;    // biela direita
+    Piston *rightPiston;                  // pistão direito
+    PistonRing *rightPistonRing;          // capa do pistão direito
+                                          // ...
     ConnectingRod *leftConnectingRod;
     Piston *leftPiston;
     PistonRing *leftPistonRing;
@@ -43,9 +42,7 @@ class Engine {
     Piston *leftPiston_2;
     PistonRing *leftPistonRing_2;
 
-    list<Vector3> list;
-
-    float v_angle;
+    float v_angle;                      // angulo entre os pistões
 
   public:
     Engine(float speed, float x, float y, float z) {
@@ -78,9 +75,9 @@ class Engine {
         this->leftConnectingRod_2 =
             new ConnectingRod(crank->getCenter(), crank->getRadius(), V_ANGLE, CONNECTIONS_DISTANCE / 2.0 + CENTER_DISTANCE);
 
-        this->leftPiston_2 = new Piston(leftConnectingRod_2->getPistonPin(),
-                                      crank->getCenter(), V_ANGLE);
+        this->leftPiston_2 = new Piston(leftConnectingRod_2->getPistonPin(), crank->getCenter(), V_ANGLE);
 
+        // antes de iniciar os aneis, é preciso atualizar as posições dos pistões
         this->update();
         this->rightPistonRing = new PistonRing(rightPiston->getConnectionPin(), crank->getCenter(), rightPiston->getWidth(),
                                                rightPiston->getThickness(), -V_ANGLE);
@@ -204,6 +201,7 @@ class Engine {
 
     void speedDOWN() { speed += SPEED_UP; }
 
+    // aumenta o angulo entre os pistões
     void increaseV_angle() {
         if (v_angle > 55) return;
         v_angle += 1;
@@ -225,6 +223,7 @@ class Engine {
         leftPistonRing_2->setV_angle(v_angle);
     }
 
+    // diminui o angulo entre os pistões
     void decreaseV_angle() {
         if (v_angle < 30) return;
         v_angle -= 1;

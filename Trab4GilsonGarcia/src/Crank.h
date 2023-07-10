@@ -13,8 +13,8 @@ Implementa a manivela do motor
 */
 
 class Crank : public Polygon {
-    Vector3 position;      // pivot de rotação da manivela
-    Vector3 connectionPin; // ponta da biela
+    Vector3 position;      // eixo de rotação da manivela
+    Vector3 connectionPin; // ponto de fixação da biela
 
     float r;
 
@@ -35,6 +35,7 @@ class Crank : public Polygon {
     }
 
   public:
+    // é inicizalida em -90 graus e depois rotacionada
     Crank(float center_radius, float x, float y, float z) : Polygon(8) {
         this->position = Vector3(x, y, z);
         this->r = center_radius;
@@ -65,8 +66,10 @@ class Crank : public Polygon {
 
     Vector3 getConnectionPoint() { return connectionPin; }
 
+    // retorna o ponto do eixo da manivela
     Vector3 getCenter() { return position; }
-
+    
+    // calcula o ponto médio da manivela
     Vector3 getRealCenter() {
         float x = 0;
         float y = 0;

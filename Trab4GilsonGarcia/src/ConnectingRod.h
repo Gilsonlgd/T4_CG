@@ -26,15 +26,15 @@ Implementa a biela
 */
 
 class ConnectingRod : public Polygon {
-    Vector3 pistonPin;
-    Vector3 crankPin;
-    Vector3 crankPosition;
-    Vector3 initialPistonPin;
+    Vector3 pistonPin;          // ponto de fixação do pistão
+    Vector3 crankPin;           // ponto de fixação da manivela
+    Vector3 crankPosition;      // posição da manivela
+    Vector3 initialPistonPin;   // ponto de fixação do pistão no momento da monstagem
 
     float angle;
     float len;
     float v_angle;
-
+    
     void initiateCoordinates() {
         float z = pistonPin.z;
 
@@ -61,6 +61,7 @@ class ConnectingRod : public Polygon {
     }
 
   public:
+    // as coordenadas são inicializada na vertical e depois são rotacionadas
     ConnectingRod(Vector3 crankPosition, float crankR, float v_angle)
         : Polygon(16) {
         this->len = CONNECTING_ROD_LEN;
@@ -114,7 +115,8 @@ class ConnectingRod : public Polygon {
         Vector2* projection = calculateProjection(d, crankPosition);
         drawProjection(projection);
     }
-
+    
+    // Atualiza a posição da biela
     void update(Vector3 newCrankPin, Vector3 crankPosition) {
         Vector3 A = crankPosition;
         Vector3 B = newCrankPin;
