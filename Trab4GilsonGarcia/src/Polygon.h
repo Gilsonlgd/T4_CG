@@ -169,10 +169,12 @@ class Polygon {
 
     void rotateY(float angle) {
         angleY += angle;
+        if (angleY > 360) angleY -= 360;
     }
 
     void rotateX(float angle) {
         angleX += angle;
+        if (angleX > 360) angleX -= 360;
     }
 
     void setVisible(bool visible) {

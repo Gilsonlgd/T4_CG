@@ -180,24 +180,24 @@ class Engine {
         rightConnectingRod->toggleVisible();
         leftConnectingRod->toggleVisible();
 
-        /*rightConnectingRod_2->toggleVisible();
-        leftConnectingRod_2->toggleVisible();*/
+        rightConnectingRod_2->toggleVisible();
+        leftConnectingRod_2->toggleVisible();
     }
 
     void togglePistonVisibility() {
         rightPiston->toggleVisible();
         leftPiston->toggleVisible();
 
-        /*rightPiston_2->toggleVisible();
-        leftPiston_2->toggleVisible();*/
+        rightPiston_2->toggleVisible();
+        leftPiston_2->toggleVisible();
     }
 
     void togglePistonRingVisibility() {
         rightPistonRing->toggleVisible();
         leftPistonRing->toggleVisible();
 
-        /*rightPistonRing_2->toggleVisible();
-        leftPistonRing_2->toggleVisible();*/
+        rightPistonRing_2->toggleVisible();
+        leftPistonRing_2->toggleVisible();
     }
 
     void speedUP() { speed -= SPEED_UP; }
