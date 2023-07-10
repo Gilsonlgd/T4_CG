@@ -90,10 +90,10 @@ void keyboard(int key) {
     }
 
     switch (key) {
-        case UP:
+        case W_KEY:
             engine->speedUP();
         break;
-        case DOWN:
+        case S_KEY:
             engine->speedDOWN();
         break;
     }

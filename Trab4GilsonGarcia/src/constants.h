@@ -33,4 +33,7 @@ Algumas constantes interessantes
 #define UP 201
 #define DOWN 203
 
+#define W_KEY 119
+#define S_KEY 115
+
 #endif // CONSTANTS_H_INCLUDED
