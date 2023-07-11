@@ -32,6 +32,8 @@ int screenWidth = 1200,
 int mouseX,
     mouseY; // variaveis globais do mouse para poder exibir dentro da render().
 
+bool is_3D = true;
+
 
 Engine* engine;
 
@@ -39,7 +41,7 @@ Engine* engine;
 // variaveis globais Todos os comandos para desenho na canvas devem ser chamados
 // dentro da render(). Deve-se manter essa funcao com poucas linhas de codigo.
 void render() {
-    engine->render();
+    is_3D ? engine->render3D() : engine->render2D();
     engine->update();
 }
 
@@ -50,6 +52,9 @@ void keyboard(int key) {
     }
 
     switch (key) {
+        case SHIFT:
+            is_3D = !is_3D;
+        break;
         case UP:
             engine->rotateX(ROTATION_SPEED);
         break;

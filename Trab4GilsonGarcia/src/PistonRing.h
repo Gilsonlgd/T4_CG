@@ -103,7 +103,7 @@ class PistonRing {
         this->visible = true;
     }
 
-    void render(float d) {
+    void render3D(float d) {
         if (!visible) return;
 
         CV::translate(0, 0);
@@ -111,6 +111,19 @@ class PistonRing {
 
         Vector2 *projection = calculateProjection(d, crankPosition);
         drawProjection(projection);
+    }
+
+    void render2D() {
+        if (!visible) return;
+
+        CV::translate(0, 0);
+        CV::color(11);
+        
+        Vector2 z_ignore[nPoints];
+        for (int i = 0; i < nPoints; i++) {
+            z_ignore[i] = points[i].ignoreZCoordinate();
+        } 
+        drawProjection(z_ignore);
     }
 
     void rotate(float angle, float cx, float cy) {

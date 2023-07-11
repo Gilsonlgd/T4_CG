@@ -44,13 +44,29 @@ class Piston : public Polygon {
         rotate(v_angle, connectionRodPin.x, connectionRodPin.y);
     }
 
-    void render(float d) {
+    void render3D(float d) {
         if (!visible) return;
         CV::translate(0, 0);
         CV::color(4);
 
         Vector2* projection = calculateProjection(d, crankPosition);
         drawProjection(projection);
+    }
+
+    void render2D() {
+        if (!visible) return;
+
+        CV::translate(0, 0);
+        if (colorScale == RGBA)
+            CV::color(r, g, b);
+        else if (colorScale == INDEX14)
+            CV::color(indexColor);
+
+        Vector2 z_ignore[nPoints];
+        for (int i = 0; i < nPoints; i++) {
+            z_ignore[i] = vertices[i].ignoreZCoordinate();
+        } 
+        drawProjection(z_ignore);
     }
 
     void update(Vector3 newConnectionPin) {

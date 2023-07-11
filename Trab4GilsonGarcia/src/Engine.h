@@ -91,24 +91,36 @@ class Engine {
                                                leftPiston_2->getThickness(), V_ANGLE);                                                         
     }
 
-    void render() {
-        crank->render(CAM_DISTANCE);
+    void render3D() {
+        crank->render3D(CAM_DISTANCE);
 
-        rightConnectingRod->render(CAM_DISTANCE);
-        rightPiston->render(CAM_DISTANCE);
-        rightPistonRing->render(CAM_DISTANCE);
+        rightConnectingRod->render3D(CAM_DISTANCE);
+        rightPiston->render3D(CAM_DISTANCE);
+        rightPistonRing->render3D(CAM_DISTANCE);
 
-        leftConnectingRod->render(CAM_DISTANCE);
-        leftPiston->render(CAM_DISTANCE);
-        leftPistonRing->render(CAM_DISTANCE);
+        leftConnectingRod->render3D(CAM_DISTANCE);
+        leftPiston->render3D(CAM_DISTANCE);
+        leftPistonRing->render3D(CAM_DISTANCE);
 
-        rightConnectingRod_2->render(CAM_DISTANCE);
-        rightPiston_2->render(CAM_DISTANCE);
-        rightPistonRing_2->render(CAM_DISTANCE);
+        rightConnectingRod_2->render3D(CAM_DISTANCE);
+        rightPiston_2->render3D(CAM_DISTANCE);
+        rightPistonRing_2->render3D(CAM_DISTANCE);
 
-        leftConnectingRod_2->render(CAM_DISTANCE);
-        leftPiston_2->render(CAM_DISTANCE);
-        leftPistonRing_2->render(CAM_DISTANCE);
+        leftConnectingRod_2->render3D(CAM_DISTANCE);
+        leftPiston_2->render3D(CAM_DISTANCE);
+        leftPistonRing_2->render3D(CAM_DISTANCE);
+    }
+
+    void render2D() {
+        crank->render2D();
+
+        rightConnectingRod->render2D();
+        rightPiston->render2D();
+        rightPistonRing->render2D();
+
+        leftConnectingRod->render2D();
+        leftPiston->render2D();
+        leftPistonRing->render2D();
     }
 
     void update() {
