@@ -78,6 +78,24 @@ class PistonRing {
         return projection;
     }
 
+    Vector2* calculateOrthoProjection(Vector3 pivot) {
+        Vector2* projection = new Vector2[nPoints];
+        
+        translateBy(-pivot.x, -pivot.y, -pivot.z);
+
+        for (int i = 0; i < nPoints; i++) {
+            Vector3 point = points[i];
+            point = rotatePointAroundXAxis(point, angleX);
+            point = rotatePointAroundYAxis(point, angleY);
+            projection[i] = point.ignoreZCoordinate();
+        }
+
+        translateBy(pivot.x, pivot.y, pivot.z);
+        translateProjection(projection, nPoints, pivot.x, pivot.y);
+        
+        return projection;
+    }
+
     void drawProjection(Vector2 *p) {     
 
         for (int i = 0; i < nPoints; i++) {
@@ -118,12 +136,9 @@ class PistonRing {
 
         CV::translate(0, 0);
         CV::color(11);
-        
-        Vector2 z_ignore[nPoints];
-        for (int i = 0; i < nPoints; i++) {
-            z_ignore[i] = points[i].ignoreZCoordinate();
-        } 
-        drawProjection(z_ignore);
+
+        Vector2 *projection = calculateOrthoProjection(crankPosition);
+        drawProjection(projection);
     }
 
     void rotate(float angle, float cx, float cy) {

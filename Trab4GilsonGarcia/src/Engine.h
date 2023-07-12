@@ -121,6 +121,14 @@ class Engine {
         leftConnectingRod->render2D();
         leftPiston->render2D();
         leftPistonRing->render2D();
+
+        rightConnectingRod_2->render2D();
+        rightPiston_2->render2D();
+        rightPistonRing_2->render2D();
+
+        leftConnectingRod_2->render2D();
+        leftPiston_2->render2D();
+        leftPistonRing_2->render2D();
     }
 
     void update() {

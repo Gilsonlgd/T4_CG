@@ -57,16 +57,10 @@ class Piston : public Polygon {
         if (!visible) return;
 
         CV::translate(0, 0);
-        if (colorScale == RGBA)
-            CV::color(r, g, b);
-        else if (colorScale == INDEX14)
-            CV::color(indexColor);
+        CV::color(4);
 
-        Vector2 z_ignore[nPoints];
-        for (int i = 0; i < nPoints; i++) {
-            z_ignore[i] = vertices[i].ignoreZCoordinate();
-        } 
-        drawProjection(z_ignore);
+        Vector2* projection = calculateOrthoProjection(crankPosition);
+        drawProjection(projection); 
     }
 
     void update(Vector3 newConnectionPin) {

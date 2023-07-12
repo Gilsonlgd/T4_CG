@@ -68,11 +68,9 @@ class Crank : public Polygon {
         else if (colorScale == INDEX14)
             CV::color(indexColor);
 
-        Vector2 z_ignore[nPoints];
-        for (int i = 0; i < nPoints; i++) {
-            z_ignore[i] = vertices[i].ignoreZCoordinate();
-        } 
-        drawProjection(z_ignore);
+        Vector2* projection = calculateOrthoProjection(position);
+        drawProjection(projection); 
+
     }
 
     void update(float angle) {

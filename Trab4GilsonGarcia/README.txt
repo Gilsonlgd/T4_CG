@@ -22,7 +22,7 @@ Este é um simulador 2D e 3D de um motor em V
 	8. Para diminuir a velocidade de rotação do eixo utilize a tecla 'S'.
 	9. Para aumentar o ângulo entre os pistões utilize a tecla 'J'.
 	10. Para diminuir o ângulo entre os pistões utilize a tecla 'U'.
-	11. Para alternar entre 2D e 3D, utilize SHIFT.
+	11. Para alternar entre visão ortográfica e perspectiva, utilize SHIFT.
 
 
  

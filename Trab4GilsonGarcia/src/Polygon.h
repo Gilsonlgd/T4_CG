@@ -98,6 +98,24 @@ class Polygon {
         return projection;
     }
 
+    Vector2* calculateOrthoProjection(Vector3 pivot) {
+        Vector2* projection = new Vector2[nPoints];
+        
+        translateBy(-pivot.x, -pivot.y, -pivot.z);
+
+        for (int i = 0; i < nPoints; i++) {
+            Vector3 point = vertices[i];
+            point = rotatePointAroundXAxis(point, angleX);
+            point = rotatePointAroundYAxis(point, angleY);
+            projection[i] = point.ignoreZCoordinate();
+        }
+
+        translateBy(pivot.x, pivot.y, pivot.z);
+        translateProjection(projection, nPoints, pivot.x, pivot.y);
+        
+        return projection;
+    }
+
     void drawProjection(Vector2 *p) {
         int secCount = (nPoints / 2) + 1;
         int n = nPoints / 2;
