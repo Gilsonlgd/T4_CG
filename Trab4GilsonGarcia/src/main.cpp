@@ -81,9 +81,11 @@ void keyboard(int key) {
         break;
         case W_KEY:
             engine->speedUP();
+            printf("");
         break;
         case S_KEY:
             engine->speedDOWN();
+            printf("");
         break;
         case J_KEY:
             engine->increaseV_angle();

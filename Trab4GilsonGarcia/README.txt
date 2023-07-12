@@ -1,6 +1,6 @@
 Trabalho de Gilson Garcia.
 
-Este é um simulador 3d de um motor em V
+Este é um simulador 2D e 3D de um motor em V
 
 ###### Funcionalidades: ######
 	Todos os requisitos mínimos foram implementados:
@@ -10,8 +10,6 @@ Este é um simulador 3d de um motor em V
 	Requisitos Extra:
 	1. Adição de mais pistões ao virabrequim
 	2. Ajuste do ângulo entre os 2 pistões, entre 60 e 110 graus
-
-obs.: na versão 2d entregue não é possível alterar o ângulo entre os pistões.
 
 ###### Intruções: ######
     	1. Para rotacionar o motor no eixo X utilize as teclas cima e baixo. 
